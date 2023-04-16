@@ -2,6 +2,10 @@ const http = require('http'),
 	fs = require('fs'),
 	url = require('url');
 
+// import http from 'node:http';
+// import fs from 'node:fs';
+// import url from 'node:url';
+
 http
 	.createServer((request, response) => {
 		let addr = request.url,
