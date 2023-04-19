@@ -60,23 +60,25 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { 
 app.use(morgan('combined', { stream: accessLogStream }));
 // Serving Static Files
 app.use(express.static('public'));
-// Error Handling
-app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).send('Unexpected Error. Please Try Again Later.');
-});
 
 // GET requests
 app.get('/', (req, res) => {
 	res.send('Welcome to TheMovie!');
 });
 
+// Following code is replaced by: app.use(express.static('public'));
 // app.get('/documentation', (req, res) => {
 //   res.sendFile('public/documentation.html', { root: __dirname });
 // });
 
 app.get('/movies', (req, res) => {
 	res.json(top10Movies);
+});
+
+// Error Handling
+app.use((err, req, res, next) => {
+	console.error(err.stack);
+	res.status(500).send('Unexpected Error. Please Try Again Later.');
 });
 
 app.listen(8080, () => {
