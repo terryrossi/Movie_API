@@ -60,13 +60,13 @@
 		<br />
 		<hr />
 		<br />
-		<table>
+		<table class="main">
 			<thead>
 				<tr class="header">
 					<th>Business Logic</th>
 					<th>URL</th>
 					<th>HTTP Method</th>
-					<th>Data Provided</th>
+					<th>Data Returned</th>
 					<th>Request Body Data Format</th>
 					<th>Response Body Data Format</th>
 				</tr>
@@ -78,11 +78,25 @@
 					<td>GET</td>
 					<td>
 						<ul>
-							<li>List of Movies</li>
+							<li>Title</li>
+							<li>Description</li>
+							<li>Main Actor</li>
+							<li>Genre</li>
+							<li>Director</li>
+							<li>Image URL</li>
+							<li>Featured</li>
 						</ul>
 					</td>
-					<td>None</td>
-					<td>A Json Object holding data about all the Movies</td>
+					<td class="json">None</td>
+					<td class="json">
+						<p>A Json Object holding data about Movies. Example:</p>
+						<code>
+							"{ title: 'Superman', description: 'Kriptonite sucks!', mainActor: 'Henry Cavill',
+							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }, { title:
+							'Lord of the Rings', description: 'Find the Ring or Die!', mainActor: 'Elijah Wood',
+							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }"
+						</code>
+					</td>
 				</tr>
 				<tr class="even">
 					<td>Return Data about a single Movie by Title</td>
@@ -92,38 +106,46 @@
 						<ul>
 							<li>Title</li>
 							<li>Description</li>
+							<li>Main Actor</li>
 							<li>Genre</li>
 							<li>Director</li>
 							<li>Image URL</li>
 							<li>Featured</li>
 						</ul>
 					</td>
-					<td>None</td>
-					<td>
+					<td class="json">None</td>
+					<td class="json">
 						<p>A Json Object holding data about one Movie. Example:</p>
-						<code> "{ title: 'Superman', actor: 'Henry Cavill', }" </code>
+						<code>
+							"{ title: 'Superman', description: 'Kriptonite sucks!', mainActor: 'Henry Cavill',
+							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }"
+						</code>
 					</td>
 				</tr>
 				<tr class="odd">
 					<td>Return Data about a Genre (Description) by Name/Title (e.g.,"Thriller")</td>
-					<td>/movies/[genre]</td>
+					<td>/movies/genres/[genre]</td>
 					<td>GET</td>
 					<td>
 						<ul>
 							<li>Title</li>
-							<li>Description</li>
+
 							<li>Genre</li>
+							<li>Description</li>
 						</ul>
 					</td>
-					<td>None</td>
-					<td>
+					<td class="json">None</td>
+					<td class="json">
 						<p>A Json Object holding data about a Genre. Example:</p>
-						<code> "{ title: 'Superman', genre: 'Thriller', }" </code>
+						<code>
+							"{ title: 'Superman', genre: 'Thriller', description: "Thriller is a genre of movie
+							that's intended to scare viewers"}"
+						</code>
 					</td>
 				</tr>
 				<tr class="even">
 					<td>Return Data about a Director by Name</td>
-					<td>/movies/[director]</td>
+					<td>/movies/directors/[directorName]</td>
 					<td>GET</td>
 					<td>
 						<ul>
@@ -133,19 +155,19 @@
 							<li>Death Year</li>
 						</ul>
 					</td>
-					<td>None</td>
-					<td>
+					<td class="json">None</td>
+					<td class="json">
 						<p>A Json Object holding data about a Director. Example:</p>
 						<code>
-							"{ dirName: 'John Doe', bio: 'jhfksdhgkdjhgkjh', birthDate: '10/01/1987', deathYear:
-							null }"
+							"{ name: 'John Doe', bio: 'jhfksdhgkdjhgkjh', birthDate: '10/01/1987', deathYear: null
+							}"
 						</code>
 					</td>
 				</tr>
 				<tr class="odd">
-					<td>Allow New User to Register</td>
-					<td>/users/new/</td>
-					<td>POST</td>
+					<td>Returns all Users</td>
+					<td>/movies/users/all</td>
+					<td>GET</td>
 					<td>
 						<ul>
 							<li>userId</li>
@@ -155,88 +177,123 @@
 						</ul>
 					</td>
 					<td>
-						<p>A Json Object holding data about the new User. Example:</p>
-						<code>
-							"{ userId: null, userName: 'JohnDoe', userEmail: 'jdoe@gmail.com',favorites:
-							["a","b","c"]}"
-						</code>
+						<p>None</p>
 					</td>
-					<td>
-						<p>A Json Object holding data about the new User. Example:</p>
+					<td class="json">
+						<p>A Json Object holding data about all the Users. Example:</p>
 						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com'}"
+							"{ userId: 2, userName: 'Tom White', preferedMovies: ['Batman', 'Wonder Woman'] }, {
+							"userName": "Toto Black", "preferedMovies": [ "Superman", "Thor" ] }"
 						</code>
 					</td>
 				</tr>
 				<tr class="even">
-					<td>Allow User to Update his UserName</td>
-					<td>/users/update/</td>
-					<td>PUT</td>
-					<td>None</td>
+					<td>Allow New User to Register</td>
+					<td>/movies/users/</td>
+					<td>POST</td>
 					<td>
-						<p>A Json Object holding data about the User. Example:</p>
-						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com', favorites:
-							["a","b","c"]}"
-						</code>
+						<ul>
+							<li>userId</li>
+							<li>userName</li>
+							<li>preferedMovies</li>
+						</ul>
 					</td>
-					<td>
-						<p>A Text Message indicating that the Account is Updated</p>
+					<td class="json">
+						<p>A Json Object holding data about the new User. Example:</p>
+						<code> "{ "userName": "Toto Black", "preferedMovies": [ "Superman", "Thor" ] }" </code>
+					</td>
+					<td class="json">
+						<p>A Json Object holding data about the new User. Example:</p>
+						<code>
+							"{userId: '1234567890', "userName": "Toto Black", "preferedMovies": [ "Superman",
+							"Thor" ] }"
+						</code>
 					</td>
 				</tr>
 				<tr class="odd">
+					<td>Allow User to Update his UserName</td>
+					<td>/movies/users/</td>
+					<td>PUT</td>
+					<td>
+						<ul>
+							<li>userId</li>
+							<li>userName</li>
+							<li>preferedMovies</li>
+						</ul>
+					</td>
+					<td class="json">
+						<p>A Json Object holding data about the User. Example:</p>
+						<code>
+							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman", "Thor"
+							] }"
+						</code>
+					</td>
+					<td class="json">
+						<code>
+							"{userId: '1234567890', "userName": "Titi Blue", "preferedMovies": [ "Superman",
+							"Thor" ] }"
+						</code>
+					</td>
+				</tr>
+				<tr class="even">
 					<td>Allow User to de-Register</td>
-					<td>/users/delete/[userId]</td>
+					<td>/movies/users/[userId]</td>
 					<td>DELETE</td>
 					<td>None</td>
-					<td>None</td>
-					<td>
+					<td class="json">None</td>
+					<td class="json">
 						<p>A Text Message indicating that the Account is Closed</p>
 					</td>
 				</tr>
-				<tr class="even">
+				<tr class="odd">
 					<td>Allow User to Add a movie to a list of Favorites</td>
-					<td>/users/favorites/add[title]</td>
+					<td>/movies/users/[userId]/favorites/[title]</td>
 					<td>PUT</td>
-					<td>None</td>
 					<td>
+						<ul>
+							<li>userId</li>
+							<li>userName</li>
+							<li>preferedMovies</li>
+						</ul>
+					</td>
+					<td class="json">
 						<p>A Json Object holding data about the User. Example:</p>
 						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com', favorites:
-							["a","b","c"]}"
+							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman", "Thor"
+							] }"
 						</code>
 					</td>
-					<td>
-						<p>
-							A Text Message Indicating Sucessful Addition + Json Object of the modified User.
-							Example:
-						</p>
+					<td class="json">
+						<p>A Json Object of the modified User. Example:</p>
 						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com', favorites:
-							["a","b","c","d"]}"
+							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
+							"Thor", "Batman" ] }"
 						</code>
 					</td>
 				</tr>
-				<tr class="odd">
+				<tr class="even">
 					<td>Allow User to Remove a movie from a list of Favorites</td>
-					<td>/users/favorites/remove[title]</td>
+					<td>/movies/users/[userId]/favorites/[title]</td>
 					<td>PUT</td>
-					<td>None</td>
 					<td>
+						<ul>
+							<li>userId</li>
+							<li>userName</li>
+							<li>preferedMovies</li>
+						</ul>
+					</td>
+					<td class="json">
 						<p>A Json Object holding data about the User. Example:</p>
 						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com', favorites:
-							["a","b","c","d"]}"
+							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
+							"Thor", "Batman" ] }"
 						</code>
 					</td>
-					<td>
-						<p>
-							A Text Message Indicating Sucessful Addition + Json Object of the modified User.
-							Example:
-						</p>
+					<td class="json">
+						<p>A Json Object of the modified User. Example:</p>
 						<code>
-							"{ userId: '1234567890', userName: 'JohnDoe', userEmail: 'jdoe@gmail.com', favorites:
-							["a","b","c"]}"
+							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
+							"Batman" ] }"
 						</code>
 					</td>
 				</tr>

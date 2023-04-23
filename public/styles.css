@@ -126,9 +126,12 @@ a:active {
 	text-align: center;
 }
 table {
-	/* max-width: 1050px; */
-	margin: 5px auto;
+	/* max-width: 800px; */
 	border: 1px solid black;
+}
+table.main {
+	/* max-width: 800px; */
+	margin: 5px auto;
 }
 tbody,
 thead,
@@ -137,6 +140,10 @@ th,
 tr {
 	padding: 10px;
 	/* margin-right: 5px; */
+}
+
+td.json {
+	min-width: 400px;
 }
 
 /* BUTTONS */
