@@ -14,7 +14,7 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/dbname', {
+mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
@@ -169,22 +169,30 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), { 
 
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }));
-// Serving Static Files
+
+// Serving Static Files. No need app.get('/file.html, (req,res)...)
+// as long as file.html is in public folder.
 app.use(express.static('public'));
+// Which is why the Following code is not required anymore
+// app.get('/documentation', (req, res) => {
+//   res.sendFile('public/documentation.html', { root: __dirname });
+// });
 
 // GET requests
 app.get('/', (request, response) => {
 	response.send('Welcome to TheMovie!');
 });
 
-// Following code is replaced by: app.use(express.static('public'));
-// app.get('/documentation', (req, res) => {
-//   res.sendFile('public/documentation.html', { root: __dirname });
-// });
-
 // Returns all Movies
 app.get('/movies', (request, response) => {
-	response.json(top10Movies);
+	Movies.find()
+		.then((movies) => {
+			response.status(201).json(movies);
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send('Error: ' + err);
+		});
 });
 
 // Returns 1 movie by title
