@@ -252,3 +252,4 @@
 ::1 - - [25/Apr/2023:23:16:38 +0000] "GET /styles.css HTTP/1.1" 304 - "http://localhost:8080/documentation.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::1 - - [25/Apr/2023:23:16:38 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/documentation.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 ::1 - - [25/Apr/2023:23:18:43 +0000] "GET /movies HTTP/1.1" 201 4540 "-" "PostmanRuntime/7.32.2"
+::1 - - [25/Apr/2023:23:29:02 +0000] "GET /movies/Superman HTTP/1.1" 201 404 "-" "PostmanRuntime/7.32.2"

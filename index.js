@@ -197,11 +197,14 @@ app.get('/movies', (request, response) => {
 
 // Returns 1 movie by title
 app.get('/movies/:name', (request, response) => {
-	response.json(
-		top10Movies.find((movie) => {
-			return movie.title == request.params.name;
+	Movies.findOne({ title: request.params.name })
+		.then((movie) => {
+			response.status(201).json(movie);
 		})
-	);
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send('Error: ' + err);
+		});
 });
 
 // Returns Data about a Genre
