@@ -6,6 +6,19 @@ const express = require('express'),
 	uuid = require('uuid');
 const { title } = require('process');
 
+// MongoDB Connection:
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Actors = Models.Actor;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/dbname', {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
+
 // MOVIES OBJECT
 let top10Movies = [
 	{
