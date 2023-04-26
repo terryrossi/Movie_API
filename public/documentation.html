@@ -77,8 +77,8 @@
 					<td>/movies</td>
 					<td>GET</td>
 					<td>
+						A List of Movie Objects:
 						<ul>
-							<li>A List of Movie Objects:</li>
 							<li>Title</li>
 							<li>Description</li>
 							<li>Main Actor</li>
@@ -111,8 +111,8 @@
 					<td>/movies/[title]</td>
 					<td>GET</td>
 					<td>
+						A Movies Object:
 						<ul>
-							<li>A Movies Object:</li>
 							<li>Title</li>
 							<li>Description</li>
 							<li>Main Actor</li>
@@ -143,8 +143,8 @@
 					<td>/movies/genres/[genre]</td>
 					<td>GET</td>
 					<td>
+						A Movie Object:
 						<ul>
-							<li>A Movie Object:</li>
 							<li>ObjectId</li>
 							<li>title</li>
 							<li>description</li>
@@ -180,8 +180,8 @@
 					<td>/movies/directors/[directorName]</td>
 					<td>GET</td>
 					<td>
+						A Movie Object:
 						<ul>
-							<li>A Movie Object:</li>
 							<li>ObjectId</li>
 							<li>title</li>
 							<li>description</li>
@@ -214,8 +214,8 @@
 					<td>/movies/users/all</td>
 					<td>GET</td>
 					<td>
+						A List of User Objects:
 						<ul>
-							<li>An Array of User Objects:</li>
 							<li>ObjectId</li>
 							<li>firstName</li>
 							<li>lastName</li>
@@ -242,8 +242,8 @@
 					<td>/movies/users/</td>
 					<td>POST</td>
 					<td>
+						A User Object:
 						<ul>
-							<li>A User Object:</li>
 							<li>ObjectId</li>
 							<li>firstName</li>
 							<li>lastName</li>
@@ -264,8 +264,7 @@
 						<code>
 							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
 							email: 'fred@gmail.com', password: '3333', birthDate:
-							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
-							ObjectId("64472440bfe0a96d5c75d06d")] }"
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [] }"
 						</code>
 					</td>
 				</tr>
@@ -274,8 +273,8 @@
 					<td>/movies/users/</td>
 					<td>PUT</td>
 					<td>
+						The Modified User Object:
 						<ul>
-							<li>The Modified User Object:</li>
 							<li>ObjectId</li>
 							<li>firstName</li>
 							<li>lastName</li>
@@ -294,6 +293,7 @@
 						</code>
 					</td>
 					<td class="json">
+						<p>A Json Object holding data about the Modified User. Example:</p>
 						<code>
 							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
 							email: 'fred@hotmail.com', password: '3333', birthDate:
@@ -317,8 +317,8 @@
 					<td>/movies/users/[lastName]/favorites</td>
 					<td>POST</td>
 					<td>
+						The Modified User Object:
 						<ul>
-							<li>The Modified User Object:</li>
 							<li>ObjectId</li>
 							<li>firstName</li>
 							<li>lastName</li>
@@ -351,8 +351,8 @@
 					<td>/movies/users/favorites/[titleId]</td>
 					<td>DELETE</td>
 					<td>
+						The Modified User Object:
 						<ul>
-							<li>The Modified User Object:</li>
 							<li>ObjectId</li>
 							<li>firstName</li>
 							<li>lastName</li>
