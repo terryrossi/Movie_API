@@ -209,7 +209,17 @@ app.get('/movies/:name', (request, response) => {
 
 // Returns Data about a Genre
 app.get('/movies/genres/:genre', (request, response) => {
-	response.send(`Sucessfull GET Request returning Data about Genre: ${request.params.genre}`);
+	Movies.findOne({ 'genre.name': request.params.genre })
+		.then((movie) => {
+			if (movie) {
+				response.status(201).json(movie);
+			} else {
+				response.status(404).send(`Couldn't Find Genre: ${request.params.genre}`);
+			}
+		})
+		.catch((err) => {
+			response.status(500).send('Error: ' + err);
+		});
 });
 
 // Returns data about Director by Director Name

@@ -91,10 +91,17 @@
 					<td class="json">
 						<p>A Json Object holding data about Movies. Example:</p>
 						<code>
-							"{ title: 'Superman', description: 'Kriptonite sucks!', mainActor: 'Henry Cavill',
-							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }, { title:
-							'Lord of the Rings', description: 'Find the Ring or Die!', mainActor: 'Elijah Wood',
-							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }"
+							"[{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
+							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ], genre: { name:
+							'Sci-fi', description: 'To look into the Future!' }, director: { name: 'Jonathan
+							Demme', bio: 'Robert Jonathan Demme was an American director, producer, and
+							screenwriter.', birth: '1944', death: '2017' }, imageURL: '', featured: false, rating:
+							4, releaseYear: 2005 }, { _id: ObjectId("6447256bbfe0a96d5c75d06e"), title: 'Lords of
+							the Ring', description: 'Find the Ring or Die!', actors: [
+							ObjectId("644715b7bfe0a96d5c75d065") ], genre: { name: 'Sci-fi', description: 'To look
+							into the Future!' }, director: { name: 'John Doee', bio: 'John Doe is an American
+							director, producer, and screenwriter.', birth: '1984', death: '' }, imageURL: '',
+							featured: false, rating: 4, releaseYear: 2006 }, {...}]"
 						</code>
 					</td>
 				</tr>
@@ -117,8 +124,12 @@
 					<td class="json">
 						<p>A Json Object holding data about one Movie. Example:</p>
 						<code>
-							"{ title: 'Superman', description: 'Kriptonite sucks!', mainActor: 'Henry Cavill',
-							genre: 'Sci-Fi', directorName: 'John Doe', image: '#', featured: 'Yes', }"
+							"{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
+							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ], genre: { name:
+							'Sci-fi', description: 'To look into the Future!' }, director: { name: 'Jonathan
+							Demme', bio: 'Robert Jonathan Demme was an American director, producer, and
+							screenwriter.', birth: '1944', death: '2017' }, imageURL: '', featured: false, rating:
+							4, releaseYear: 2005 }"
 						</code>
 					</td>
 				</tr>
@@ -136,10 +147,19 @@
 					</td>
 					<td class="json">None</td>
 					<td class="json">
-						<p>A Json Object holding data about a Genre. Example:</p>
+						<p>
+							A Json Object holding data about one Movie (which includes genre information).
+							Example:
+						</p>
 						<code>
-							"{ title: 'Superman', genre: 'Thriller', description: "Thriller is a genre of movie
-							that's intended to scare viewers"}"
+							"{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
+							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ],<span
+								style="color: red"
+								>genre: { name: 'Sci-fi', description: 'To look into the Future!' }</span
+							>
+							, director: { name: 'Jonathan Demme', bio: 'Robert Jonathan Demme was an American
+							director, producer, and screenwriter.', birth: '1944', death: '2017' }, imageURL: '',
+							featured: false, rating: 4, releaseYear: 2005 }"
 						</code>
 					</td>
 				</tr>
