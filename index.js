@@ -338,39 +338,56 @@ app.delete('/movies/users/:lastname', (request, response) => {
 });
 
 // Allow User to Add a movie to a list of Favorites
-app.put('/movies/users/:userId/favorites/:title', (request, response) => {
-	let userToUpdate = users.find((user) => {
-		return user.userId === parseInt(request.params.userId);
-	});
-	userToUpdate.preferedMovies.push(request.params.title);
-	response.json(userToUpdate);
+app.post('/movies/users/:lastName/favorites', (request, response) => {
+	let movieToAdd = request.body;
+	console.log(movieToAdd._id);
+	Users.findOneAndUpdate(
+		{ lastName: request.params.lastName },
+		{
+			$push: {
+				favoriteMovies: movieToAdd._id,
+			},
+		},
+		{ new: true } // This line makes sure that the updated document is returned
+	)
+		.then((user) => {
+			if (!user) {
+				response.status(400).send(`User ${request.params.lastName} NOT Found`);
+			} else {
+				response.status(201).json(user);
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send(`Error: ${err}`);
+		});
 });
 
 // Allow User to remove a Movie from the list of Favorites
-// app.delete('/movies/users/:userId/favorites/:title', (request, response) => {
-// 	let indexOfUser = users.indexOf(
-// 		users.find((user) => {
-// 			return user.userId == request.params.userId;
-// 		})
-// 	);
-// 	let indexOfTitle = users[indexOfUser].preferedMovies.indexOf(
-// 		users[indexOfUser].preferedMovies.find((title) => {
-// 			return title == request.params.title;
-// 		})
-// 	);
-// 	let userToUpdate = users[indexOfUser].preferedMovies[indexOfTitle];
-
-// 	if (userToUpdate) {
-// 		users[indexOfUser].preferedMovies.splice(indexOfTitle, 1);
-// 		response.json(users[indexOfUser]);
-// 	} else {
-// 		response
-// 			.status(404)
-// 			.send(
-// 				`${users[indexOfUser].userName} doesn't have ${request.params.title} in his/her Favorites`
-// 			);
-// 	}
-// });
+app.delete('/movies/users/:lastName/favorites', (request, response) => {
+	let movieToDelete = request.body;
+	console.log(movieToDelete._id);
+	Users.findOneAndUpdate(
+		{ lastName: request.params.lastName },
+		{
+			$pull: {
+				favoriteMovies: movieToDelete._id,
+			},
+		},
+		{ new: true } // This line makes sure that the updated document is returned
+	)
+		.then((user) => {
+			if (!user) {
+				response.status(400).send(`User ${request.params.lastName} NOT Found`);
+			} else {
+				response.status(201).json(user);
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send(`Error: ${err}`);
+		});
+});
 
 // Error Handling
 app.use((err, request, response, next) => {

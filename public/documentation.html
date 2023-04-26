@@ -73,11 +73,12 @@
 			</thead>
 			<tbody>
 				<tr class="odd">
-					<td>Return a List of Movies</td>
+					<td>Returns a List of Movie Objects</td>
 					<td>/movies</td>
 					<td>GET</td>
 					<td>
 						<ul>
+							<li>A List of Movie Objects:</li>
 							<li>Title</li>
 							<li>Description</li>
 							<li>Main Actor</li>
@@ -89,7 +90,7 @@
 					</td>
 					<td class="json">None</td>
 					<td class="json">
-						<p>A Json Object holding data about Movies. Example:</p>
+						<p>A Json Object holding a list of Movie Objects. Example:</p>
 						<code>
 							"[{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
 							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ], genre: { name:
@@ -106,11 +107,12 @@
 					</td>
 				</tr>
 				<tr class="even">
-					<td>Return Data about a single Movie by Title</td>
+					<td>Returns a Json File with a single Movie Object by Title</td>
 					<td>/movies/[title]</td>
 					<td>GET</td>
 					<td>
 						<ul>
+							<li>A Movies Object:</li>
 							<li>Title</li>
 							<li>Description</li>
 							<li>Main Actor</li>
@@ -122,7 +124,7 @@
 					</td>
 					<td class="json">None</td>
 					<td class="json">
-						<p>A Json Object holding data about one Movie. Example:</p>
+						<p>A Json File holding one Movie Object. Example:</p>
 						<code>
 							"{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
 							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ], genre: { name:
@@ -134,15 +136,22 @@
 					</td>
 				</tr>
 				<tr class="odd">
-					<td>Return Data about a Genre (Description) by Name/Title (e.g.,"Thriller")</td>
+					<td>
+						Returns a JSON file with a Movie Object which includes the Genre (Description) by
+						Name/Title (e.g.,"Thriller")
+					</td>
 					<td>/movies/genres/[genre]</td>
 					<td>GET</td>
 					<td>
 						<ul>
-							<li>Title</li>
-
-							<li>Genre</li>
-							<li>Description</li>
+							<li>A Movie Object:</li>
+							<li>ObjectId</li>
+							<li>title</li>
+							<li>description</li>
+							<li>actors[]</li>
+							<li style="color: red">genre{name, description}</li>
+							<li>director{name, bio, birth, death}</li>
+							<li>imageURL</li>
 						</ul>
 					</td>
 					<td class="json">None</td>
@@ -164,23 +173,39 @@
 					</td>
 				</tr>
 				<tr class="even">
-					<td>Return Data about a Director by Name</td>
+					<td>
+						Returns a JSON file with a Movie Object which includes the Director information by
+						Director Name
+					</td>
 					<td>/movies/directors/[directorName]</td>
 					<td>GET</td>
 					<td>
 						<ul>
-							<li>Name</li>
-							<li>Bio</li>
-							<li>Birth Year</li>
-							<li>Death Year</li>
+							<li>A Movie Object:</li>
+							<li>ObjectId</li>
+							<li>title</li>
+							<li>description</li>
+							<li>actors[]</li>
+							<li>genre{name, description}</li>
+							<li style="color: red">director{name, bio, birth, death}</li>
+							<li>imageURL</li>
 						</ul>
 					</td>
 					<td class="json">None</td>
 					<td class="json">
-						<p>A Json Object holding data about a Director. Example:</p>
+						<p>
+							A Json Object holding data about one Movie (which includes Director information).
+							Example:
+						</p>
 						<code>
-							"{ name: 'John Doe', bio: 'jhfksdhgkdjhgkjh', birthDate: '10/01/1987', deathYear: null
-							}"
+							"{ _id: ObjectId("64472440bfe0a96d5c75d06d"), title: 'Superman', description:
+							'Kriptonite sucks!', actors: [ ObjectId("644714e9bfe0a96d5c75d064") ],genre: { name:
+							'Sci-fi', description: 'To look into the Future!' } ,
+							<span style="color: red">
+								director: { name: 'Jonathan Demme', bio: 'Robert Jonathan Demme was an American
+								director, producer, and screenwriter.', birth: '1944', death: '2017' }
+							</span>
+							, imageURL: '', featured: false, rating: 4, releaseYear: 2005 }"
 						</code>
 					</td>
 				</tr>
@@ -190,68 +215,90 @@
 					<td>GET</td>
 					<td>
 						<ul>
-							<li>userId</li>
-							<li>userName</li>
-							<li>userEmail</li>
-							<li>favorites</li>
+							<li>An Array of User Objects:</li>
+							<li>ObjectId</li>
+							<li>firstName</li>
+							<li>lastName</li>
+							<li>email</li>
+							<li>birthDate</li>
+							<li>favoriteMovies[]</li>
 						</ul>
 					</td>
 					<td>
 						<p>None</p>
 					</td>
 					<td class="json">
-						<p>A Json Object holding data about all the Users. Example:</p>
+						<p>A Json Object holding a list of all the User Objects. Example:</p>
 						<code>
-							"{ userId: 2, userName: 'Tom White', preferedMovies: ['Batman', 'Wonder Woman'] }, {
-							"userName": "Toto Black", "preferedMovies": [ "Superman", "Thor" ] }"
+							"[{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }, {...}]"
 						</code>
 					</td>
 				</tr>
 				<tr class="even">
-					<td>Allow New User to Register</td>
+					<td>Allows New User to Register</td>
 					<td>/movies/users/</td>
 					<td>POST</td>
 					<td>
 						<ul>
-							<li>userId</li>
-							<li>userName</li>
-							<li>preferedMovies</li>
+							<li>A User Object:</li>
+							<li>ObjectId</li>
+							<li>firstName</li>
+							<li>lastName</li>
+							<li>email</li>
+							<li>birthDate</li>
+							<li>favoriteMovies[]</li>
 						</ul>
 					</td>
 					<td class="json">
 						<p>A Json Object holding data about the new User. Example:</p>
-						<code> "{ "userName": "Toto Black", "preferedMovies": [ "Superman", "Thor" ] }" </code>
+						<code>
+							"{firstName: 'Frank', lastName: 'Red', email: 'fred@gmail.com', password: '3333',
+							birthDate: ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [] }"
+						</code>
 					</td>
 					<td class="json">
 						<p>A Json Object holding data about the new User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Toto Black", "preferedMovies": [ "Superman",
-							"Thor" ] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }"
 						</code>
 					</td>
 				</tr>
 				<tr class="odd">
-					<td>Allow User to Update his UserName</td>
+					<td>Allow User to Update his email</td>
 					<td>/movies/users/</td>
 					<td>PUT</td>
 					<td>
 						<ul>
-							<li>userId</li>
-							<li>userName</li>
-							<li>preferedMovies</li>
+							<li>The Modified User Object:</li>
+							<li>ObjectId</li>
+							<li>firstName</li>
+							<li>lastName</li>
+							<li>email</li>
+							<li>birthDate</li>
+							<li>favoriteMovies[]</li>
 						</ul>
 					</td>
 					<td class="json">
 						<p>A Json Object holding data about the User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman", "Thor"
-							] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }"
 						</code>
 					</td>
 					<td class="json">
 						<code>
-							"{userId: '1234567890', "userName": "Titi Blue", "preferedMovies": [ "Superman",
-							"Thor" ] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@hotmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }"
 						</code>
 					</td>
 				</tr>
@@ -262,58 +309,74 @@
 					<td>None</td>
 					<td class="json">None</td>
 					<td class="json">
-						<p>A Text Message indicating that the Account is Closed</p>
+						<p>A Text Message indicating that the User has been Deleted</p>
 					</td>
 				</tr>
 				<tr class="odd">
 					<td>Allow User to Add a movie to a list of Favorites</td>
-					<td>/movies/users/[userId]/favorites/[title]</td>
-					<td>PUT</td>
+					<td>/movies/users/[lastName]/favorites</td>
+					<td>POST</td>
 					<td>
 						<ul>
-							<li>userId</li>
-							<li>userName</li>
-							<li>preferedMovies</li>
+							<li>The Modified User Object:</li>
+							<li>ObjectId</li>
+							<li>firstName</li>
+							<li>lastName</li>
+							<li>email</li>
+							<li>birthDate</li>
+							<li>favoriteMovies[]</li>
 						</ul>
 					</td>
 					<td class="json">
 						<p>A Json Object holding data about the User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman", "Thor"
-							] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }"
 						</code>
 					</td>
 					<td class="json">
 						<p>A Json Object of the modified User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
-							"Thor", "Batman" ] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d"), ObjectId("64471900bfe0a96d5c75d069") ] }"
 						</code>
 					</td>
 				</tr>
 				<tr class="even">
 					<td>Allow User to Remove a movie from a list of Favorites</td>
-					<td>/movies/users/[userId]/favorites/[title]</td>
-					<td>PUT</td>
+					<td>/movies/users/favorites/[titleId]</td>
+					<td>DELETE</td>
 					<td>
 						<ul>
-							<li>userId</li>
-							<li>userName</li>
-							<li>preferedMovies</li>
+							<li>The Modified User Object:</li>
+							<li>ObjectId</li>
+							<li>firstName</li>
+							<li>lastName</li>
+							<li>email</li>
+							<li>birthDate</li>
+							<li>favoriteMovies[]</li>
 						</ul>
 					</td>
 					<td class="json">
 						<p>A Json Object holding data about the User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
-							"Thor", "Batman" ] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d"), ObjectId("64471900bfe0a96d5c75d069") ] }"
 						</code>
 					</td>
 					<td class="json">
 						<p>A Json Object of the modified User. Example:</p>
 						<code>
-							"{userId: '1234567890', "userName": "Titi Red", "preferedMovies": [ "Superman",
-							"Batman" ] }"
+							"{_id: ObjectId("64472bb9bfe0a96d5c75d076"), firstName: 'Frank', lastName: 'Red',
+							email: 'fred@gmail.com', password: '3333', birthDate:
+							ISODate("1969-09-12T00:00:00.000Z"), favoriteMovies: [
+							ObjectId("64472440bfe0a96d5c75d06d")] }"
 						</code>
 					</td>
 				</tr>
