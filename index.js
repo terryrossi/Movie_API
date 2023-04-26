@@ -263,7 +263,6 @@ app.get('/movies/users/all', (request, response) => {
 
 // Allows User to Register
 app.post('/movies/users/', (request, response) => {
-	console.log(request.body);
 	let newUser = request.body;
 	if (!newUser.lastName) {
 		response.status(400).send('The request sent is missing the User Name');
@@ -296,13 +295,31 @@ app.post('/movies/users/', (request, response) => {
 	}
 });
 
-// Allow User to Update his UserName
+// Allow User to Update his UserName/Email
 app.put('/movies/users/', (request, response) => {
-	let userToUpdate = users.find((user) => {
-		return user.userId === request.body.userId;
-	});
-	userToUpdate.userName = request.body.userName;
-	response.json(userToUpdate);
+	let updatedUser = request.body;
+	console.log(updatedUser);
+
+	Users.findOneAndUpdate(
+		{ lastName: updatedUser.lastName },
+		{
+			$set: {
+				email: updatedUser.email,
+			},
+		},
+		{ new: true } // This line makes sure that the updated document is returned
+	)
+		.then((user) => {
+			if (!user) {
+				response.status(400).send(`User ${updatedUser.lastName} NOT Found`);
+			} else {
+				response.status(201).json(user);
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send(`Error: ${err}`);
+		});
 });
 
 // Allow User to de-Register
