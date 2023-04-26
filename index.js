@@ -298,7 +298,6 @@ app.post('/movies/users/', (request, response) => {
 // Allow User to Update his UserName/Email
 app.put('/movies/users/', (request, response) => {
 	let updatedUser = request.body;
-	console.log(updatedUser);
 
 	Users.findOneAndUpdate(
 		{ lastName: updatedUser.lastName },
@@ -323,19 +322,19 @@ app.put('/movies/users/', (request, response) => {
 });
 
 // Allow User to de-Register
-app.delete('/movies/users/:userId', (request, response) => {
-	let userToDelete = users.find((user) => {
-		return user.userId === parseInt(request.params.userId);
-	});
-	if (userToDelete) {
-		console.log('userfound', userToDelete);
-		users = users.filter((user) => {
-			return user.userId !== parseInt(request.params.userId);
+app.delete('/movies/users/:lastname', (request, response) => {
+	Users.findOneAndRemove({ lastName: request.params.lastname })
+		.then((user) => {
+			if (!user) {
+				response.status(404).send(`User: ${request.params.lastname} NOT Found`);
+			} else {
+				response.status(200).send(`User: ${request.params.lastname} has been Deleted`);
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send(`Error : ${err}`);
 		});
-		response.send(`UserId : ${request.params.userId} has been Deleted`);
-	} else {
-		response.status(404).send(`Could not find userId : ${request.params.userId}`);
-	}
 });
 
 // Allow User to Add a movie to a list of Favorites
