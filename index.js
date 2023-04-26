@@ -224,11 +224,17 @@ app.get('/movies/genres/:genre', (request, response) => {
 
 // Returns data about Director by Director Name
 app.get('/movies/director/:directorName', (request, response) => {
-	response.json(
-		directors.find((director) => {
-			return director.name == request.params.directorName;
+	Movies.findOne({ 'director.name': request.params.directorName })
+		.then((movie) => {
+			if (movie) {
+				response.status(201).json(movie);
+			} else {
+				response.status(404).send(`Couldn't Find Director: ${request.params.directorName}`);
+			}
 		})
-	);
+		.catch((err) => {
+			response.status(500).send('Error: ' + err);
+		});
 });
 
 // Returns a list of Users
