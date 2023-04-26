@@ -263,13 +263,36 @@ app.get('/movies/users/all', (request, response) => {
 
 // Allows User to Register
 app.post('/movies/users/', (request, response) => {
+	console.log(request.body);
 	let newUser = request.body;
-	if (!newUser.userName) {
+	if (!newUser.lastName) {
 		response.status(400).send('The request sent is missing the User Name');
 	} else {
-		newUser.userId = uuid.v4();
-		users.push(newUser);
-		response.status(201).json(newUser);
+		Users.findOne({ lastName: request.body.lastName })
+			.then((user) => {
+				if (user) {
+					response.status(400).send(`User: ${request.body.lastName} already exist!`);
+				} else {
+					Users.create({
+						firstName: request.body.firstName,
+						lastName: request.body.lastName,
+						email: request.body.email,
+						password: request.body.password,
+						birthDate: request.body.birthDate,
+					})
+						.then((user) => {
+							response.status(201).json(user);
+						})
+						.catch((err) => {
+							console.error(err);
+							response.status(500).send(`Error: ${err}`);
+						});
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error: ${err}`);
+			});
 	}
 });
 
@@ -308,35 +331,35 @@ app.put('/movies/users/:userId/favorites/:title', (request, response) => {
 });
 
 // Allow User to remove a Movie from the list of Favorites
-app.delete('/movies/users/:userId/favorites/:title', (request, response) => {
-	let indexOfUser = users.indexOf(
-		users.find((user) => {
-			return user.userId == request.params.userId;
-		})
-	);
-	let indexOfTitle = users[indexOfUser].preferedMovies.indexOf(
-		users[indexOfUser].preferedMovies.find((title) => {
-			return title == request.params.title;
-		})
-	);
-	let userToUpdate = users[indexOfUser].preferedMovies[indexOfTitle];
+// app.delete('/movies/users/:userId/favorites/:title', (request, response) => {
+// 	let indexOfUser = users.indexOf(
+// 		users.find((user) => {
+// 			return user.userId == request.params.userId;
+// 		})
+// 	);
+// 	let indexOfTitle = users[indexOfUser].preferedMovies.indexOf(
+// 		users[indexOfUser].preferedMovies.find((title) => {
+// 			return title == request.params.title;
+// 		})
+// 	);
+// 	let userToUpdate = users[indexOfUser].preferedMovies[indexOfTitle];
 
-	if (userToUpdate) {
-		users[indexOfUser].preferedMovies.splice(indexOfTitle, 1);
-		response.json(users[indexOfUser]);
-	} else {
-		response
-			.status(404)
-			.send(
-				`${users[indexOfUser].userName} doesn't have ${request.params.title} in his/her Favorites`
-			);
-	}
-});
+// 	if (userToUpdate) {
+// 		users[indexOfUser].preferedMovies.splice(indexOfTitle, 1);
+// 		response.json(users[indexOfUser]);
+// 	} else {
+// 		response
+// 			.status(404)
+// 			.send(
+// 				`${users[indexOfUser].userName} doesn't have ${request.params.title} in his/her Favorites`
+// 			);
+// 	}
+// });
 
 // Error Handling
 app.use((err, request, response, next) => {
 	console.error(err.stack);
-	res.status(500).send('Unexpected Error. Please Try Again Later.');
+	response.status(500).send('Unexpected Error. Please Try Again Later.');
 });
 
 app.listen(8080, () => {
