@@ -187,7 +187,11 @@ app.get('/', (request, response) => {
 app.get('/movies', (request, response) => {
 	Movies.find()
 		.then((movies) => {
-			response.status(201).json(movies);
+			if (movies) {
+				response.status(201).json(movies);
+			} else {
+				response.status(404).send(`Couldn't Find any Movies`);
+			}
 		})
 		.catch((err) => {
 			console.error(err);
@@ -199,7 +203,11 @@ app.get('/movies', (request, response) => {
 app.get('/movies/:name', (request, response) => {
 	Movies.findOne({ title: request.params.name })
 		.then((movie) => {
-			response.status(201).json(movie);
+			if (movie) {
+				response.status(201).json(movie);
+			} else {
+				response.status(404).send(`Couldn't Find Movie: ${request.params.name}`);
+			}
 		})
 		.catch((err) => {
 			console.error(err);
@@ -239,7 +247,18 @@ app.get('/movies/director/:directorName', (request, response) => {
 
 // Returns a list of Users
 app.get('/movies/users/all', (request, response) => {
-	response.json(users);
+	Users.find()
+		.then((users) => {
+			if (users) {
+				response.status(201).json(users);
+			} else {
+				response.status(404).send(`Couldn't Find any Users`);
+			}
+		})
+		.catch((err) => {
+			console.error(err);
+			response.status(500).send(`Error : ${err}`);
+		});
 });
 
 // Allows User to Register
