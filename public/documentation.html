@@ -140,7 +140,7 @@
 						Returns a JSON file with a Movie Object which includes the Genre (Description) by
 						Name/Title (e.g.,"Thriller")
 					</td>
-					<td>/movies/genres/[genre]</td>
+					<td>/genres/[genre]</td>
 					<td>GET</td>
 					<td>
 						A Movie Object:
@@ -177,7 +177,7 @@
 						Returns a JSON file with a Movie Object which includes the Director information by
 						Director Name
 					</td>
-					<td>/movies/directors/[directorName]</td>
+					<td>/directors/[directorName]</td>
 					<td>GET</td>
 					<td>
 						A Movie Object:
@@ -211,7 +211,7 @@
 				</tr>
 				<tr class="odd">
 					<td>Returns all Users</td>
-					<td>/movies/users/all</td>
+					<td>/users/</td>
 					<td>GET</td>
 					<td>
 						A List of User Objects:
@@ -239,7 +239,7 @@
 				</tr>
 				<tr class="even">
 					<td>Allows New User to Register</td>
-					<td>/movies/users/</td>
+					<td>/users/</td>
 					<td>POST</td>
 					<td>
 						A User Object:
@@ -270,7 +270,7 @@
 				</tr>
 				<tr class="odd">
 					<td>Allow User to Update his email</td>
-					<td>/movies/users/</td>
+					<td>/users/</td>
 					<td>PUT</td>
 					<td>
 						The Modified User Object:
@@ -314,7 +314,7 @@
 				</tr>
 				<tr class="odd">
 					<td>Allow User to Add a movie to a list of Favorites</td>
-					<td>/movies/users/[lastName]/favorites</td>
+					<td>/users/[lastName]/favorites</td>
 					<td>POST</td>
 					<td>
 						The Modified User Object:
@@ -348,7 +348,7 @@
 				</tr>
 				<tr class="even">
 					<td>Allow User to Remove a movie from a list of Favorites</td>
-					<td>/movies/users/favorites/[titleId]</td>
+					<td>/users/favorites/[titleId]</td>
 					<td>DELETE</td>
 					<td>
 						The Modified User Object:
