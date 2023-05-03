@@ -22,6 +22,8 @@ mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 const app = express();
 
 app.use(bodyParser.json());
+// OR SHOULD IT BE... ?!? (based on exercise 2.9 Authentication Logic)
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 let auth = require('./auth')(app);
 
