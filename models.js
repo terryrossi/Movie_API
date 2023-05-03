@@ -23,6 +23,7 @@ let movieSchema = mongoose.Schema({
 let userSchema = mongoose.Schema({
 	firstName: { type: String, required: true },
 	lastName: { type: String, required: true },
+	userName: { type: String, required: true },
 	email: { type: String, required: true },
 	password: { type: String, required: true },
 	birthDate: Date,

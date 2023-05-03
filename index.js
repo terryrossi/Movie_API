@@ -19,149 +19,14 @@ mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 	useUnifiedTopology: true,
 });
 
-// MOVIES OBJECT
-// let top10Movies = [
-// 	{
-// 		title: 'Superman',
-// 		description: 'Kriptonite sucks!',
-// 		mainActor: 'Henry Cavill',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Lord of the Rings',
-// 		description: 'Find the Ring or Die!',
-// 		mainActor: 'Elijah Wood',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Batman',
-// 		description: 'Dark Bat!',
-// 		mainActor: 'Christian Bale',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'Clint Eastwood',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Ironman',
-// 		description: 'Funny, Rich, Succesfull and Handsome!',
-// 		mainActor: 'Robert Downey Jr',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Spiderman',
-// 		description: 'Radioactive Spider!',
-// 		mainActor: 'Tom Holland',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Bourne Supremacy',
-// 		description: 'Always ahead of the game!',
-// 		mainActor: 'Matt Damon',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'Jimmy Lewis',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Star Wars',
-// 		description: 'Best space ship in the Galaxy',
-// 		mainActor: 'Harrison Ford',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Thor',
-// 		description: 'Thunder God!',
-// 		mainActor: 'Chris Hemsworth',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Hulk',
-// 		description: 'Smash Machine!',
-// 		mainActor: 'Mark Buffalo',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'Jimmy Lewis',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Black Widow',
-// 		description: 'Fatal Beauty',
-// 		mainActor: 'Scarlett Johansson',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'John Doe',
-
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// 	{
-// 		title: 'Wonder Woman',
-// 		description: 'Last Amazon!',
-// 		mainActor: 'Gal Gabot',
-// 		genre: 'Sci-Fi',
-// 		directorName: 'Clint Eastwood',
-// 		image: '#',
-// 		featured: 'Yes',
-// 	},
-// ];
-
-// DIRECTORS OBJECT
-// let directors = [
-// 	{
-// 		name: 'John Doe',
-// 		bio: 'kjsdfkesdmbfksdbfkesdmfbksdmfbn',
-// 		dateOfBirth: '01-01-2000',
-// 		dateOfDeath: null,
-// 	},
-// 	{
-// 		name: 'Jimmy Lewis',
-// 		bio: 'kjsdfkesdmbfksdbfkesdmfbksdmfbn',
-// 		dateOfBirth: '01-01-2000',
-// 		dateOfDeath: null,
-// 	},
-// 	{
-// 		name: 'Clint Eastwood',
-// 		bio: 'kjsdfkesdmbfksdbfkesdmfbksdmfbn',
-// 		dateOfBirth: '01-01-2000',
-// 		dateOfDeath: null,
-// 	},
-// ];
-// USERS OBJECT
-// let users = [
-// 	{ userId: 1, userName: 'John Black', preferedMovies: ['Superman', 'Thor'] },
-// 	{ userId: 2, userName: 'Tom White', preferedMovies: ['Batman', 'Wonder Woman'] },
-// ];
-
 const app = express();
 
 app.use(bodyParser.json());
+
+let auth = require('./auth')(app);
+
+const passport = require('passport');
+require('./passport');
 
 // create a write stream (in append mode)
 // a ‘log.txt’ file is created in root directory
@@ -184,20 +49,26 @@ app.get('/', (request, response) => {
 });
 
 // Returns all Movies
-app.get('/movies', (request, response) => {
-	Movies.find()
-		.then((movies) => {
-			if (movies) {
-				response.status(201).json(movies);
-			} else {
-				response.status(404).send(`Couldn't Find any Movies`);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send('Error: ' + err);
-		});
-});
+app.get(
+	'/movies',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Movies.find()
+			.then((movies) => {
+				if (movies) {
+					response.status(201).json(movies);
+				} else {
+					response.status(404).send(`Couldn't Find any Movies`);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
 
 // Returns 1 movie by title
 app.get('/movies/:name', (request, response) => {
@@ -261,6 +132,21 @@ app.get('/users/', (request, response) => {
 		});
 });
 
+// Returns 1 User using username
+app.get('/users/:userName', (request, response) => {
+	Users.findOne({ userName: request.params.userName })
+		.then((user) => {
+			if (user) {
+				response.status(201).json(user);
+			} else {
+				response.status(404).send(`Couldn't Find Username: ${request.params.userName}`);
+			}
+		})
+		.catch((err) => {
+			response.status(500).send('Error: ' + err);
+		});
+});
+
 // Allows User to Register
 app.post('/users/', (request, response) => {
 	let newUser = request.body;
@@ -275,6 +161,7 @@ app.post('/users/', (request, response) => {
 					Users.create({
 						firstName: request.body.firstName,
 						lastName: request.body.lastName,
+						userName: request.body.userName,
 						email: request.body.email,
 						password: request.body.password,
 						birthDate: request.body.birthDate,
