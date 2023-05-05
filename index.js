@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express'),
 	morgan = require('morgan'),
 	fs = require('fs'), // import built in node modules fs and path
@@ -14,10 +16,13 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/MoviesDB', {
+mongoose.connect(process.env.DATABASE_URL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+// const db = mongoose.Connection;
+// db.on('error', (error) => console.error(error));
+// db.once('open', () => console.log('Connected to Database'));
 
 const app = express();
 
@@ -73,103 +78,239 @@ app.get(
 );
 
 // Returns 1 movie by title
-app.get('/movies/:name', (request, response) => {
-	Movies.findOne({ title: request.params.name })
-		.then((movie) => {
-			if (movie) {
-				response.status(201).json(movie);
-			} else {
-				response.status(404).send(`Couldn't Find Movie: ${request.params.name}`);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send('Error: ' + err);
-		});
-});
+app.get(
+	'/movies/:name',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Movies.findOne({ title: request.params.name })
+			.then((movie) => {
+				if (movie) {
+					response.status(201).json(movie);
+				} else {
+					response.status(404).send(`Couldn't Find Movie: ${request.params.name}`);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
 
 // Returns Data about a Genre
-app.get('/genres/:genre', (request, response) => {
-	Movies.findOne({ 'genre.name': request.params.genre })
-		.then((movie) => {
-			if (movie) {
-				response.status(201).json(movie);
-			} else {
-				response.status(404).send(`Couldn't Find Genre: ${request.params.genre}`);
-			}
-		})
-		.catch((err) => {
-			response.status(500).send('Error: ' + err);
-		});
-});
+app.get(
+	'/genres/:genre',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Movies.findOne({ 'genre.name': request.params.genre })
+			.then((movie) => {
+				if (movie) {
+					response.status(201).json(movie);
+				} else {
+					response.status(404).send(`Couldn't Find Genre: ${request.params.genre}`);
+				}
+			})
+			.catch((err) => {
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
 
 // Returns data about Director by Director Name
-app.get('/director/:directorName', (request, response) => {
-	Movies.findOne({ 'director.name': request.params.directorName })
-		.then((movie) => {
-			if (movie) {
-				response.status(201).json(movie);
-			} else {
-				response.status(404).send(`Couldn't Find Director: ${request.params.directorName}`);
-			}
-		})
-		.catch((err) => {
-			response.status(500).send('Error: ' + err);
-		});
-});
+app.get(
+	'/director/:directorName',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Movies.findOne({ 'director.name': request.params.directorName })
+			.then((movie) => {
+				if (movie) {
+					response.status(201).json(movie);
+				} else {
+					response.status(404).send(`Couldn't Find Director: ${request.params.directorName}`);
+				}
+			})
+			.catch((err) => {
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
 
 // Returns a list of Users
-app.get('/users/', (request, response) => {
-	Users.find()
-		.then((users) => {
-			if (users) {
-				response.status(201).json(users);
-			} else {
-				response.status(404).send(`Couldn't Find any Users`);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send(`Error : ${err}`);
-		});
-});
+app.get(
+	'/users/',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Users.find()
+			.then((users) => {
+				if (users) {
+					response.status(201).json(users);
+				} else {
+					response.status(404).send(`Couldn't Find any Users`);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error : ${err}`);
+			});
+	}
+);
 
 // Returns 1 User using username
-app.get('/users/:userName', (request, response) => {
-	Users.findOne({ userName: request.params.userName })
-		.then((user) => {
-			if (user) {
-				response.status(201).json(user);
-			} else {
-				response.status(404).send(`Couldn't Find Username: ${request.params.userName}`);
-			}
-		})
-		.catch((err) => {
-			response.status(500).send('Error: ' + err);
-		});
-});
-
-// Allows User to Register
-app.post('/users/', (request, response) => {
-	let newUser = request.body;
-	if (!newUser.lastName) {
-		response.status(400).send('The request sent is missing the User Name');
-	} else {
-		Users.findOne({ lastName: request.body.lastName })
+app.get(
+	'/users/:userName',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Users.findOne({ userName: request.params.userName })
 			.then((user) => {
 				if (user) {
-					response.status(400).send(`User: ${request.body.lastName} already exist!`);
+					response.status(201).json(user);
 				} else {
-					Users.create({
-						firstName: request.body.firstName,
-						lastName: request.body.lastName,
-						userName: request.body.userName,
-						email: request.body.email,
-						password: request.body.password,
-						birthDate: request.body.birthDate,
-					})
+					response.status(404).send(`Couldn't Find Username: ${request.params.userName}`);
+				}
+			})
+			.catch((err) => {
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
+
+// Allows User to Register
+app.post(
+	'/users/',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		let newUser = request.body;
+		if (!newUser.lastName) {
+			response.status(400).send('The request sent is missing the User Name');
+		} else {
+			Users.findOne({ lastName: request.body.lastName })
+				.then((user) => {
+					if (user) {
+						response.status(400).send(`User: ${request.body.lastName} already exist!`);
+					} else {
+						Users.create({
+							firstName: request.body.firstName,
+							lastName: request.body.lastName,
+							userName: request.body.userName,
+							email: request.body.email,
+							password: request.body.password,
+							birthDate: request.body.birthDate,
+						})
+							.then((user) => {
+								response.status(201).json(user);
+							})
+							.catch((err) => {
+								console.error(err);
+								response.status(500).send(`Error: ${err}`);
+							});
+					}
+				})
+				.catch((err) => {
+					console.error(err);
+					response.status(500).send(`Error: ${err}`);
+				});
+		}
+	}
+);
+
+// Allow User to Update his UserName/Email
+app.patch(
+	'/users/',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		let updatedUser = request.body;
+
+		Users.findOneAndUpdate(
+			{ userName: updatedUser.userName },
+			{
+				$set: {
+					email: updatedUser.email,
+				},
+			},
+			{ new: true } // This line makes sure that the updated document is returned
+		)
+			.then((user) => {
+				if (!user) {
+					response.status(400).send(`User ${updatedUser.lastName} NOT Found`);
+				} else {
+					response.status(201).json(user);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error: ${err}`);
+			});
+	}
+);
+
+// Allow User to de-Register
+app.delete(
+	'/users/:username',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Users.findOneAndRemove({ userName: request.params.username })
+			.then((user) => {
+				if (!user) {
+					response.status(404).send(`User: ${request.params.username} NOT Found`);
+				} else {
+					response.status(200).send(`User: ${request.params.username} has been Deleted`);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error : ${err}`);
+			});
+	}
+);
+
+// Allow User to Add a movie to a list of Favorites
+app.post(
+	'/users/:userName/favorites',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		let movieToAdd = request.body;
+		// console.log(movieToAdd);
+		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
+			.then((user) => {
+				// console.log(movieToAdd._id);
+				if (user) {
+					response
+						.status(403)
+						.send(`This Movie ${movieToAdd.title} is already in your Favorite Movies`);
+				} else {
+					Users.findOneAndUpdate(
+						{ userName: request.params.userName },
+						{
+							$push: {
+								favoriteMovies: movieToAdd._id,
+							},
+						},
+						{ new: true } // This line makes sure that the updated document is returned
+					)
 						.then((user) => {
-							response.status(201).json(user);
+							if (!user) {
+								response.status(400).send(`User ${request.params.userName} NOT Found`);
+							} else {
+								response.status(201).json(user);
+							}
 						})
 						.catch((err) => {
 							console.error(err);
@@ -182,115 +323,39 @@ app.post('/users/', (request, response) => {
 				response.status(500).send(`Error: ${err}`);
 			});
 	}
-});
-
-// Allow User to Update his UserName/Email
-app.put('/users/', (request, response) => {
-	let updatedUser = request.body;
-
-	Users.findOneAndUpdate(
-		{ lastName: updatedUser.lastName },
-		{
-			$set: {
-				email: updatedUser.email,
-			},
-		},
-		{ new: true } // This line makes sure that the updated document is returned
-	)
-		.then((user) => {
-			if (!user) {
-				response.status(400).send(`User ${updatedUser.lastName} NOT Found`);
-			} else {
-				response.status(201).json(user);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send(`Error: ${err}`);
-		});
-});
-
-// Allow User to de-Register
-app.delete('/users/:lastname', (request, response) => {
-	Users.findOneAndRemove({ lastName: request.params.lastname })
-		.then((user) => {
-			if (!user) {
-				response.status(404).send(`User: ${request.params.lastname} NOT Found`);
-			} else {
-				response.status(200).send(`User: ${request.params.lastname} has been Deleted`);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send(`Error : ${err}`);
-		});
-});
-
-// Allow User to Add a movie to a list of Favorites
-app.post('/users/:lastName/favorites', (request, response) => {
-	let movieToAdd = request.body;
-	console.log(movieToAdd);
-	Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
-		.then((user) => {
-			console.log(movieToAdd._id);
-			if (user) {
-				response
-					.status(403)
-					.send(`This Movie ${movieToAdd.title} is already in your Favorite Movies`);
-			} else {
-				Users.findOneAndUpdate(
-					{ lastName: request.params.lastName },
-					{
-						$push: {
-							favoriteMovies: movieToAdd._id,
-						},
-					},
-					{ new: true } // This line makes sure that the updated document is returned
-				)
-					.then((user) => {
-						if (!user) {
-							response.status(400).send(`User ${request.params.lastName} NOT Found`);
-						} else {
-							response.status(201).json(user);
-						}
-					})
-					.catch((err) => {
-						console.error(err);
-						response.status(500).send(`Error: ${err}`);
-					});
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send(`Error: ${err}`);
-		});
-});
+);
 
 // Allow User to remove a Movie from the list of Favorites
-app.delete('/users/:lastName/favorites', (request, response) => {
-	let movieToDelete = request.body;
-	console.log(movieToDelete._id);
-	Users.findOneAndUpdate(
-		{ lastName: request.params.lastName },
-		{
-			$pull: {
-				favoriteMovies: movieToDelete._id,
+app.delete(
+	'/users/:userName/favorites',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		let movieToDelete = request.body;
+		console.log(movieToDelete._id);
+		Users.findOneAndUpdate(
+			{ userName: request.params.userName },
+			{
+				$pull: {
+					favoriteMovies: movieToDelete._id,
+				},
 			},
-		},
-		{ new: true } // This line makes sure that the updated document is returned
-	)
-		.then((user) => {
-			if (!user) {
-				response.status(400).send(`User ${request.params.lastName} NOT Found`);
-			} else {
-				response.status(201).json(user);
-			}
-		})
-		.catch((err) => {
-			console.error(err);
-			response.status(500).send(`Error: ${err}`);
-		});
-});
+			{ new: true } // This line makes sure that the updated document is returned
+		)
+			.then((user) => {
+				if (!user) {
+					response.status(400).send(`User ${request.params.userName} NOT Found`);
+				} else {
+					response.status(201).json(user);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error: ${err}`);
+			});
+	}
+);
 
 // Error Handling
 app.use((err, request, response, next) => {
