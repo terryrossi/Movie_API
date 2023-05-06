@@ -26,6 +26,25 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 const app = express();
 
+// CORS Security
+const cors = require('cors');
+// app.use(cors());
+let allowedOrigins = ['http://localhost:8080/', 'http://localhost:8080/movies'];
+app.use(
+	cors({
+		origin: (origin, done) => {
+			if (!origin) return done(null, true);
+			if (allowedOrigins.indexOf(origin) === -1) {
+				// If a specific origin isn’t found on the list of allowed origins
+				let message =
+					'The CORS policy for this application doesn’t allow access from origin ' + origin;
+				return done(new Error(message), false);
+			}
+			return done(null, true);
+		},
+	})
+);
+
 app.use(bodyParser.json());
 // OR SHOULD IT BE... ?!? (based on exercise 2.9 Authentication Logic)
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -187,25 +206,25 @@ app.get(
 // Allows User to Register
 app.post(
 	'/users/',
-	passport.authenticate('jwt', {
-		session: false,
-	}),
+	// passport.authenticate('jwt', {
+	// 	session: false,
+	// }),
 	(request, response) => {
-		let newUser = request.body;
-		if (!newUser.lastName) {
+		if (!request.body.userName) {
 			response.status(400).send('The request sent is missing the User Name');
 		} else {
-			Users.findOne({ lastName: request.body.lastName })
+			let hashedPassword = Users.hashPassword(request.body.password);
+			Users.findOne({ userName: request.body.userName })
 				.then((user) => {
 					if (user) {
-						response.status(400).send(`User: ${request.body.lastName} already exist!`);
+						response.status(400).send(`User: ${request.body.userName} already exist!`);
 					} else {
 						Users.create({
 							firstName: request.body.firstName,
 							lastName: request.body.lastName,
 							userName: request.body.userName,
 							email: request.body.email,
-							password: request.body.password,
+							password: hashedPassword,
 							birthDate: request.body.birthDate,
 						})
 							.then((user) => {
@@ -287,10 +306,9 @@ app.post(
 	}),
 	(request, response) => {
 		let movieToAdd = request.body;
-		// console.log(movieToAdd);
+
 		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
 			.then((user) => {
-				// console.log(movieToAdd._id);
 				if (user) {
 					response
 						.status(403)
@@ -333,7 +351,7 @@ app.delete(
 	}),
 	(request, response) => {
 		let movieToDelete = request.body;
-		console.log(movieToDelete._id);
+
 		Users.findOneAndUpdate(
 			{ userName: request.params.userName },
 			{

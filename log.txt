@@ -394,3 +394,7 @@
 ::1 - - [05/May/2023:03:02:58 +0000] "POST /users/3/favorites HTTP/1.1" 400 16 "-" "PostmanRuntime/7.32.2"
 ::1 - - [05/May/2023:03:03:12 +0000] "POST /users/2/favorites HTTP/1.1" 201 161 "-" "PostmanRuntime/7.32.2"
 ::1 - - [05/May/2023:03:04:46 +0000] "DELETE /users/2/favorites HTTP/1.1" 201 135 "-" "PostmanRuntime/7.32.2"
+::1 - - [06/May/2023:00:32:24 +0000] "GET /users/ HTTP/1.1" 201 273 "-" "PostmanRuntime/7.32.2"
+::1 - - [06/May/2023:00:32:55 +0000] "POST /users/ HTTP/1.1" 500 41 "-" "PostmanRuntime/7.32.2"
+::1 - - [06/May/2023:00:34:54 +0000] "POST /users/ HTTP/1.1" 201 194 "-" "PostmanRuntime/7.32.2"
+::1 - - [06/May/2023:00:35:29 +0000] "PATCH /users/ HTTP/1.1" 201 194 "-" "PostmanRuntime/7.32.2"
