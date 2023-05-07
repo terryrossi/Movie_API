@@ -14,20 +14,24 @@ passport.use(
 			passwordField: 'password',
 		},
 		(username, password, done) => {
-			console.log(username + '  ' + password);
+			// console.log('username: ' + username + ' password: ' + password);
+
+			// console.log('username: ' + username + ' HASHED password: ' + hashedPassword);
+
 			Users.findOne({ userName: username })
 				.then((user) => {
+					console.log('user found in passport.js ' + user);
 					if (!user) {
 						console.log('incorrect username');
 						return done(null, false, {
 							message: 'Incorrect username.',
 						});
 					}
-					if (!user.validPassword(password)) {
+					if (!user.validatePassword(password)) {
 						console.log('Incorrect Password');
 						return done(null, false, { message: 'Incorrect Password' });
 					}
-					console.log('finished');
+					console.log('LOGGED IN!!!');
 					return done(null, user);
 				})
 				.catch((error) => {

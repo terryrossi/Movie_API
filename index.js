@@ -6,7 +6,10 @@ const express = require('express'),
 	path = require('path'),
 	bodyParser = require('body-parser'),
 	uuid = require('uuid');
+
 const { title } = require('process');
+
+const { body, check, validationResult } = require('express-validator');
 
 // MongoDB Connection:
 const mongoose = require('mongoose');
@@ -30,6 +33,7 @@ const app = express();
 const cors = require('cors');
 // app.use(cors());
 let allowedOrigins = ['http://localhost:8080/', 'http://localhost:8080/movies'];
+
 app.use(
 	cors({
 		origin: (origin, done) => {
@@ -204,14 +208,46 @@ app.get(
 );
 
 // Allows User to Register
+
+// Validation logic here for request
+//you can either use a chain of methods like .not().isEmpty()
+//which means "opposite of isEmpty" in plain english "is not empty"
+//or use .isLength({min: 5}) which means
+//minimum value of 5 characters are only allowed
+
 app.post(
 	'/users/',
-	// passport.authenticate('jwt', {
-	// 	session: false,
-	// }),
+	[
+		check('firstName', 'First Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Firstname MUST ONLY contain alphanumeric chareacters.'),
+		check('lastName', 'Last Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Lastname MUST ONLY contain alphanumeric chareacters.'),
+		check('userName', 'User Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Username MUST ONLY contain alphanumeric chareacters.')
+			.isLength({ min: 5 })
+			.withMessage('Username must be at least 5 Characters Alphanumeric.'),
+		check('password', 'Password is Required.')
+			.notEmpty()
+			.isLength({ min: 5 })
+			.withMessage('Password must be at least 5 characters.'),
+		check('email', 'Email does not appear to be Valid.').isEmail(),
+		check('birthDate', 'Birth Date does not appear to be Valid. Format must be: yyyy-mm-dd.')
+			.trim()
+			.isDate()
+			.optional({ checkFalsy: true }),
+	],
 	(request, response) => {
-		if (!request.body.userName) {
-			response.status(400).send('The request sent is missing the User Name');
+		let errors = validationResult(request);
+		if (!errors.isEmpty()) {
+			response.status(422).json({
+				errors: errors.array(),
+			});
 		} else {
 			let hashedPassword = Users.hashPassword(request.body.password);
 			Users.findOne({ userName: request.body.userName })
@@ -244,20 +280,96 @@ app.post(
 	}
 );
 
-// Allow User to Update his UserName/Email
+// Allow User to Update his First name, Last name, userID and Email
 app.patch(
 	'/users/',
 	passport.authenticate('jwt', {
 		session: false,
 	}),
+	[
+		check('firstName', 'First Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Firstname MUST ONLY contain alphanumeric chareacters.'),
+		check('lastName', 'Last Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Lastname MUST ONLY contain alphanumeric chareacters.'),
+		check('userName', 'User Name is Required.')
+			.notEmpty()
+			.isAlphanumeric()
+			.withMessage('Username MUST ONLY contain alphanumeric chareacters.')
+			.isLength({ min: 5 })
+			.withMessage('Username must be at least 5 Characters Alphanumeric.'),
+		check('password', 'Password is Required.')
+			.notEmpty()
+			.isLength({ min: 5 })
+			.withMessage('Password must be at least 5 characters.'),
+		check('email', 'Email does not appear to be Valid.').isEmail(),
+		check('birthDate', 'Birth Date does not appear to be Valid. Format must be: yyyy-mm-dd.')
+			.trim()
+			.isDate()
+			.optional({ checkFalsy: true }),
+	],
 	(request, response) => {
-		let updatedUser = request.body;
+		let errors = validationResult(request);
+		if (!errors.isEmpty()) {
+			return response.status(422).json({ errors: errors.array() });
+		}
+		console.log('request.body._id: ' + request.body._id);
 
 		Users.findOneAndUpdate(
-			{ userName: updatedUser.userName },
+			{ _id: request.body._id },
 			{
 				$set: {
-					email: updatedUser.email,
+					firstName: request.body.firstName,
+					lastName: request.body.lastName,
+					userName: request.body.userName,
+					email: request.body.email,
+					birthDate: request.body.birthDate,
+				},
+			},
+			{ new: true } // This line makes sure that the updated document is returned
+		)
+			.then((user) => {
+				if (!user) {
+					response.status(400).send(`User ${updatedUser.lastName} NOT Found`);
+				} else {
+					response.status(201).json(user);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send(`Error: ${err}`);
+			});
+	}
+);
+
+// Allow User to change his password
+app.patch(
+	'/users/password',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	[
+		check('password', 'Password is Required.')
+			.notEmpty()
+			.isLength({ min: 5 })
+			.withMessage('Password must be at least 5 characters.'),
+	],
+	(request, response) => {
+		let errors = validationResult(request);
+		if (!errors.isEmpty()) {
+			return response.status(422).json({ errors: errors.array() });
+		}
+
+		let hashedPassword = Users.hashPassword(request.body.password);
+
+		Users.findOneAndUpdate(
+			{ _id: request.body._id },
+			{
+				$set: {
+					password: hashedPassword,
 				},
 			},
 			{ new: true } // This line makes sure that the updated document is returned

@@ -35,7 +35,10 @@ userSchema.statics.hashPassword = (password) => {
 	return bcrypt.hashSync(password, 10);
 };
 userSchema.methods.validatePassword = function (password) {
-	return bcrypt.compareSync(password, this.Password);
+	console.log('in models... receiving password: ' + password);
+	console.log('in models... this.password: ' + this.password);
+
+	return bcrypt.compareSync(password, this.password);
 };
 
 let actorSchema = mongoose.Schema({
