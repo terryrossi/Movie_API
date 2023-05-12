@@ -19,6 +19,8 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
+console.log(process.env.DATABASE_URL);
+
 mongoose.connect(process.env.DATABASE_URL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -493,6 +495,7 @@ app.use((err, request, response, next) => {
 	response.status(500).send('Unexpected Error. Please Try Again Later.');
 });
 
-app.listen(8080, () => {
-	console.log('Your app is listening on port 8080.');
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+	console.log('Your app is listening on port: ' + port);
 });
