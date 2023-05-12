@@ -21,7 +21,7 @@ const Users = Models.User;
 
 console.log(process.env.DATABASE_URL);
 
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
