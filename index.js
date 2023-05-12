@@ -19,8 +19,6 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-console.log(process.env.DATABASE_URL);
-
 // mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 // 	useNewUrlParser: true,
 // 	useUnifiedTopology: true,
@@ -40,7 +38,11 @@ const app = express();
 // CORS Security
 const cors = require('cors');
 // app.use(cors());
-let allowedOrigins = ['http://localhost:8080/', 'http://localhost:8080/movies'];
+let allowedOrigins = [
+	'http://localhost:8080/',
+	'http://localhost:8080/movies',
+	'https://theflix-api.herokuapp.com',
+];
 
 app.use(
 	cors({
@@ -96,7 +98,7 @@ app.get(
 		Movies.find()
 			.then((movies) => {
 				if (movies) {
-					console.log(movies);
+					console.log('Movies: ' + movies);
 					response.status(201).json(movies);
 				} else {
 					response.status(404).send(`Couldn't Find any Movies`);
