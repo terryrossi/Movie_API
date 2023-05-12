@@ -96,6 +96,7 @@ app.get(
 		Movies.find()
 			.then((movies) => {
 				if (movies) {
+					console.log(movies);
 					response.status(201).json(movies);
 				} else {
 					response.status(404).send(`Couldn't Find any Movies`);
