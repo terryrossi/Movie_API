@@ -21,10 +21,16 @@ const Users = Models.User;
 
 console.log(process.env.DATABASE_URL);
 
-mongoose.connect('mongodb://localhost:27017/MoviesDB', {
+// mongoose.connect('mongodb://localhost:27017/MoviesDB', {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true,
+// });
+
+mongoose.connect(process.env.CONNECTION_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
 // const db = mongoose.Connection;
 // db.on('error', (error) => console.error(error));
 // db.once('open', () => console.log('Connected to Database'));

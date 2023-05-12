@@ -1,0 +1,13 @@
+{"_id":{"$oid":"64471499bfe0a96d5c75d063"},"firstName":"clint","lastName":"Eastwood","imageURL":"","birthDate":{"$date":{"$numberLong":"-347155200000"}}}
+{"_id":{"$oid":"644714e9bfe0a96d5c75d064"},"firstName":"Henry","lastName":"Cavill","imageURL":"","birthDate":{"$date":"1978-01-01T00:00:00Z"}}
+{"_id":{"$oid":"644715b7bfe0a96d5c75d065"},"firstName":"Elijah","lastName":"Wood","imageURL":"","BirthDate":{"$date":"1995-01-01T00:00:00Z"}}
+{"_id":{"$oid":"644715e6bfe0a96d5c75d066"},"firstName":"Christian","lastName":"Bale","imageURL":"","BirthDate":{"$date":{"$numberLong":"-31536000000"}}}
+{"_id":{"$oid":"64471607bfe0a96d5c75d067"},"firstName":"Robert","lastName":"Downey","imageURL":"","BirthDate":{"$date":{"$numberLong":"-189388800000"}}}
+{"_id":{"$oid":"64471635bfe0a96d5c75d068"},"firstName":"Tom","lastName":"Holland","imageURL":"","BirthDate":{"$date":"1998-01-01T00:00:00Z"}}
+{"_id":{"$oid":"6447199abfe0a96d5c75d06a"},"firstName":"Jodie","lastName":"Foster","imageURL":"","BirthDate":{"$date":{"$numberLong":"-157766400000"}}}
+{"_id":{"$oid":"644719ccbfe0a96d5c75d06c"},"firstName":"Anthony","lastName":"Hopkins","imageURL":"","BirthDate":{"$date":{"$numberLong":"-631152000000"}}}
+{"_id":{"$oid":"644728d4bfe0a96d5c75d072"},"firstName":"Matt","lastName":"Damon","imageURL":"","BirthDate":{"$date":{"$numberLong":"-126230400000"}}}
+{"_id":{"$oid":"64473e1473aaa127fc941264"},"firstName":"Harrison","lastName":"Ford","imageURL":"","BirthDate":{"$date":{"$numberLong":"-441849600000"}}}
+{"_id":{"$oid":"64473eb673aaa127fc941266"},"firstName":"Chris","lastName":"Hensworth","imageURL":"","BirthDate":{"$date":"1972-01-01T00:00:00Z"}}
+{"_id":{"$oid":"64473f4a73aaa127fc941268"},"firstName":"Scarlet","lastName":"Johansson","imageURL":"","BirthDate":{"$date":"1981-01-01T00:00:00Z"}}
+{"_id":{"$oid":"64473fe073aaa127fc94126a"},"firstName":"Gal","lastName":"Gabot","imageURL":"","BirthDate":{"$date":"1983-01-01T00:00:00Z"}}

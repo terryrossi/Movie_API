@@ -1,0 +1,3 @@
+{"_id":{"$oid":"6455a0ae0e6e5047f9710aec"},"firstName":"4","lastName":"4","userName":"4","email":"B","password":"$2b$10$g/3uJ02KPPn5B.CID5HgAep2ukec/MiGvK1r8DLXw0TSR/Hz2jaee","favoriteMovies":[],"__v":0}
+{"_id":{"$oid":"6455b3541b497e584d91899b"},"firstName":"Tom","lastName":"White","userName":"twhite","email":"twhite@gmail.com","password":"$2b$10$QEmRPyQK5u/cEzaGpELCBeuXRxPM0We7c1FIxwXTX4XJyT1GUjS4m","favoriteMovies":[],"__v":0}
+{"_id":{"$oid":"6456d0f13558b251e39e6c2f"},"firstName":"Bill","lastName":"Brown","userName":"bbrown","email":"bbrown@hotmail.com","password":"$2b$10$PA8xNhrY/YN5YkiqTpRqO.7ohs9dJUEDxazlKbYfcbqmdpy.7pwNC","birthDate":{"$date":"2000-01-02T00:00:00Z"},"favoriteMovies":[],"__v":0}
