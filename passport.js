@@ -14,13 +14,8 @@ passport.use(
 			passwordField: 'password',
 		},
 		(username, password, done) => {
-			// console.log('username: ' + username + ' password: ' + password);
-
-			// console.log('username: ' + username + ' HASHED password: ' + hashedPassword);
-
 			Users.findOne({ userName: username })
 				.then((user) => {
-					console.log('user found in passport.js ' + user);
 					if (!user) {
 						console.log('incorrect username');
 						return done(null, false, {
@@ -46,7 +41,7 @@ passport.use(
 	new JWTStrategy(
 		{
 			jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-			secretOrKey: 'your_jwt_secret',
+			secretOrKey: 'wt_secret_abcd1234',
 		},
 		(jwtPayload, done) => {
 			return Users.findById(jwtPayload._id)

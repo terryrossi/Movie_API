@@ -98,7 +98,6 @@ app.get(
 		Movies.find()
 			.then((movies) => {
 				if (movies) {
-					console.log('Movies: ' + movies);
 					response.status(201).json(movies);
 				} else {
 					response.status(404).send(`Couldn't Find any Movies`);
@@ -327,7 +326,6 @@ app.patch(
 		if (!errors.isEmpty()) {
 			return response.status(422).json({ errors: errors.array() });
 		}
-		console.log('request.body._id: ' + request.body._id);
 
 		Users.findOneAndUpdate(
 			{ _id: request.body._id },
