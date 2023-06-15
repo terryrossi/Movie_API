@@ -91,9 +91,9 @@ app.get('/', (request, response) => {
 // Returns all Movies
 app.get(
 	'/movies',
-	passport.authenticate('jwt', {
-		session: false,
-	}),
+	// passport.authenticate('jwt', {
+	// 	session: false,
+	// }),
 	(request, response) => {
 		Movies.find()
 			.then((movies) => {
