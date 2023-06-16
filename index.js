@@ -46,20 +46,18 @@ let allowedOrigins = [
 ];
 
 app.use(
-	cors()
-	// cors({
-	// 	origin: (origin, done) => {
-	// 		if (!origin) return done(null, true);
-	// 		if (allowedOrigins.indexOf(origin) === -1) {
-	// 			// If a specific origin isn’t found on the list of allowed origins
-	// 			let message =
-	// 				'The CORS Policy for this application doesn"t allow access from origin ' + origin;
-	// 			return done(new Error(message), false);
-	// 		}
-	// 		return done(null, true);
-	// 	},
-	// }
-	// )
+	cors({
+		origin: (origin, done) => {
+			if (!origin) return done(null, true);
+			if (allowedOrigins.indexOf(origin) === -1) {
+				// If a specific origin isn’t found on the list of allowed origins
+				let message =
+					'The CORS Policy for this application doesn"t allow access from origin ' + origin;
+				return done(new Error(message), false);
+			}
+			return done(null, true);
+		},
+	})
 );
 
 app.use(bodyParser.json());
