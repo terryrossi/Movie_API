@@ -255,6 +255,7 @@ app.post(
 	],
 	(request, response) => {
 		let errors = validationResult(request);
+		console.log('Request received by /users/', request);
 		if (!errors.isEmpty()) {
 			response.status(422).json({
 				errors: errors.array(),
