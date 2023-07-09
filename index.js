@@ -292,7 +292,7 @@ app.post(
 	}
 );
 
-// Allow User to Update his First name, Last name, userID and Email
+// Allow User to Update his First name, Last name and Email
 app.patch(
 	'/users/',
 	passport.authenticate('jwt', {
@@ -307,21 +307,21 @@ app.patch(
 			.notEmpty()
 			.isAlphanumeric()
 			.withMessage('Lastname MUST ONLY contain alphanumeric chareacters.'),
-		check('userName', 'User Name is Required.')
-			.notEmpty()
-			.isAlphanumeric()
-			.withMessage('Username MUST ONLY contain alphanumeric chareacters.')
-			.isLength({ min: 5 })
-			.withMessage('Username must be at least 5 Characters Alphanumeric.'),
-		check('password', 'Password is Required.')
-			.notEmpty()
-			.isLength({ min: 5 })
-			.withMessage('Password must be at least 5 characters.'),
+		// check('userName', 'User Name is Required.')
+		// 	.notEmpty()
+		// 	.isAlphanumeric()
+		// 	.withMessage('Username MUST ONLY contain alphanumeric chareacters.')
+		// 	.isLength({ min: 5 })
+		// 	.withMessage('Username must be at least 5 Characters Alphanumeric.'),
+		// check('password', 'Password is Required.')
+		// 	.notEmpty()
+		// 	.isLength({ min: 5 })
+		// 	.withMessage('Password must be at least 5 characters.'),
 		check('email', 'Email does not appear to be Valid.').isEmail(),
-		check('birthDate', 'Birth Date does not appear to be Valid. Format must be: yyyy-mm-dd.')
-			.trim()
-			.isDate()
-			.optional({ checkFalsy: true }),
+		// check('birthDate', 'Birth Date does not appear to be Valid. Format must be: yyyy-mm-dd.')
+		// 	.trim()
+		// 	.isDate()
+		// 	.optional({ checkFalsy: true }),
 	],
 	(request, response) => {
 		let errors = validationResult(request);
@@ -335,16 +335,16 @@ app.patch(
 				$set: {
 					firstName: request.body.firstName,
 					lastName: request.body.lastName,
-					userName: request.body.userName,
+					// userName: request.body.userName,
 					email: request.body.email,
-					birthDate: request.body.birthDate,
+					// birthDate: request.body.birthDate,
 				},
 			},
 			{ new: true } // This line makes sure that the updated document is returned
 		)
 			.then((user) => {
 				if (!user) {
-					response.status(400).send(`User ${updatedUser.lastName} NOT Found`);
+					response.status(400).send(`User ${updatedUser.userName} NOT Found`);
 				} else {
 					response.status(201).json(user);
 				}
