@@ -45,7 +45,7 @@ let allowedOrigins = [
 	'https://theflix-api.herokuapp.com',
 	'https://theflix-redux.netlify.app/',
 ];
-
+console.log('TESTTTTTTTTTTTT');
 app.use(
 	cors({
 		origin: (origin, done) => {
