@@ -39,11 +39,11 @@ const app = express();
 const cors = require('cors');
 // app.use(cors());
 let allowedOrigins = [
-	'http://localhost:8080/',
+	'http://localhost:8080',
 	'http://localhost:1234',
 	'http://localhost:8080/movies',
 	'https://theflix-api.herokuapp.com',
-	'https://theflix-redux.netlify.app/',
+	'https://theflix-redux.netlify.app',
 ];
 console.log('TESTTTTTTTTTTTT');
 app.use(
