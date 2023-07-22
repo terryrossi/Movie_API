@@ -142,7 +142,8 @@ app.get(
 		session: false,
 	}),
 	(request, response) => {
-		Movies.findOne({ _id: request.params._id })
+		console.log(request.params.id);
+		Movies.findOne({ _id: ObjectId(request.params.id) })
 			.then((movie) => {
 				if (movie) {
 					response.status(201).json(movie);
