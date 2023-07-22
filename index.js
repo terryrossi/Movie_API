@@ -13,21 +13,22 @@ const { body, check, validationResult } = require('express-validator');
 
 // MongoDB Connection:
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const Models = require('./models.js');
 
 const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-// mongoose.connect('mongodb://localhost:27017/MoviesDB', {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true,
-// });
-
-mongoose.connect(process.env.CONNECTION_URI, {
+mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
+// mongoose.connect(process.env.CONNECTION_URI, {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true,
+// });
 
 // const db = mongoose.Connection;
 // db.on('error', (error) => console.error(error));
@@ -142,13 +143,17 @@ app.get(
 		session: false,
 	}),
 	(request, response) => {
-		console.log(request.params.id);
-		Movies.findOne({ _id: ObjectId(request.params.id) })
+		const movieId = request.params.id;
+		const objectId = new ObjectId(movieId);
+
+		console.log('Movies.id in /movies/id/:id: ', request.params.id);
+
+		Movies.findOne({ _id: objectId })
 			.then((movie) => {
 				if (movie) {
 					response.status(201).json(movie);
 				} else {
-					response.status(404).send(`Couldn't Find Movie: ${request.params.id}`);
+					response.status(404).send(`Couldn't Find Movie ID: ${request.params.id}`);
 				}
 			})
 			.catch((err) => {
