@@ -135,6 +135,28 @@ app.get(
 	}
 );
 
+// Returns 1 movie by id
+app.get(
+	'/movies/:id',
+	passport.authenticate('jwt', {
+		session: false,
+	}),
+	(request, response) => {
+		Movies.findOne({ _id: request.params.id })
+			.then((movie) => {
+				if (movie) {
+					response.status(201).json(movie);
+				} else {
+					response.status(404).send(`Couldn't Find Movie: ${request.params.name}`);
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				response.status(500).send('Error: ' + err);
+			});
+	}
+);
+
 // Returns Data about a Genre
 app.get(
 	'/genres/:genre',
