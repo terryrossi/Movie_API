@@ -137,7 +137,7 @@ app.get(
 
 // Returns 1 movie by id
 app.get(
-	'/movies/:id',
+	'/movies/id/:id',
 	passport.authenticate('jwt', {
 		session: false,
 	}),
@@ -148,7 +148,7 @@ app.get(
 				if (movie) {
 					response.status(201).json(movie);
 				} else {
-					response.status(404).send(`Couldn't Find Movie: ${request.params.name}`);
+					response.status(404).send(`Couldn't Find Movie: ${request.params.id}`);
 				}
 			})
 			.catch((err) => {
