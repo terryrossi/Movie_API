@@ -20,15 +20,15 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-// mongoose.connect('mongodb://localhost:27017/MoviesDB', {
-// 	useNewUrlParser: true,
-// 	useUnifiedTopology: true,
-// });
-
-mongoose.connect(process.env.CONNECTION_URI, {
+mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
+
+// mongoose.connect(process.env.CONNECTION_URI, {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true,
+// });
 
 // const db = mongoose.Connection;
 // db.on('error', (error) => console.error(error));
@@ -46,7 +46,7 @@ let allowedOrigins = [
 	'https://theflix-api.herokuapp.com',
 	'https://theflix-redux.netlify.app',
 ];
-console.log('TESTTTTTTTTTTTT');
+// console.log('TESTTTTTTTTTTTT');
 app.use(
 	cors({
 		origin: (origin, done) => {
@@ -465,7 +465,9 @@ app.post(
 				if (user) {
 					response
 						.status(403)
-						.send(`This Movie ${movieToAdd.title} is already in your Favorite Movies`);
+						.send(
+							`Sorry ${request.params.userName} The Movie ${movieToAdd.title} is already in your Favorite Movies`
+						);
 				} else {
 					Users.findOneAndUpdate(
 						{ userName: request.params.userName },
@@ -504,6 +506,8 @@ app.delete(
 	}),
 	(request, response) => {
 		let movieToDelete = request.body;
+		let username = request.params.userName;
+		console.log(`MOVIETODELETE ${movieToDelete} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 
 		Users.findOneAndUpdate(
 			{ userName: request.params.userName },
@@ -515,6 +519,7 @@ app.delete(
 			{ new: true } // This line makes sure that the updated document is returned
 		)
 			.then((user) => {
+				console.log('USER IN DELETE FAVORITE MOVIE ############', user);
 				if (!user) {
 					response.status(400).send(`User ${request.params.userName} NOT Found`);
 				} else {
