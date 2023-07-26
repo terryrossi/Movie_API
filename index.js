@@ -458,7 +458,11 @@ app.post(
 		session: false,
 	}),
 	(request, response) => {
-		let movieToAdd = request.body;
+		const username = request.params.userName;
+		const movieToAdd = request.body;
+		console.log(`REQUEST.BODY SHOULD BE MOVIE OBJECT. ====== ${movieToAdd}`);
+
+		console.log(`MOVIE TO ADD ${movieToAdd} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
 
 		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
 			.then((user) => {
@@ -506,6 +510,7 @@ app.delete(
 	}),
 	(request, response) => {
 		let movieToDelete = request.body;
+		console.log(`REQUEST.BODY SHOULD BE MOVIE OBJECT. ====== ${request.body}`);
 		let username = request.params.userName;
 		console.log(`MOVIETODELETE ${movieToDelete} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 
