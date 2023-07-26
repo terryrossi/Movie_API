@@ -20,15 +20,15 @@ const Movies = Models.Movie;
 const Actors = Models.Actor;
 const Users = Models.User;
 
-mongoose.connect('mongodb://localhost:27017/MoviesDB', {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
-
-// mongoose.connect(process.env.CONNECTION_URI, {
+// mongoose.connect('mongodb://localhost:27017/MoviesDB', {
 // 	useNewUrlParser: true,
 // 	useUnifiedTopology: true,
 // });
+
+mongoose.connect(process.env.CONNECTION_URI, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+});
 
 // const db = mongoose.Connection;
 // db.on('error', (error) => console.error(error));

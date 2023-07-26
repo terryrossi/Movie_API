@@ -529,3 +529,4 @@
 127.0.0.1 - - [26/Jul/2023:04:13:28 +0000] "POST /users/yyyyyyyy/favorites HTTP/1.1" 201 351 "-" "PostmanRuntime/7.32.3"
 127.0.0.1 - - [26/Jul/2023:04:13:58 +0000] "DELETE /users/yyyyyyyy/favorites HTTP/1.1" 201 324 "-" "PostmanRuntime/7.32.3"
 127.0.0.1 - - [26/Jul/2023:04:27:32 +0000] "GET /movies/ HTTP/1.1" 201 4540 "-" "PostmanRuntime/7.32.3"
+127.0.0.1 - - [26/Jul/2023:15:40:30 +0000] "GET /users/yyyyyyyy HTTP/1.1" 201 324 "-" "PostmanRuntime/7.32.3"
