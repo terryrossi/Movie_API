@@ -462,16 +462,14 @@ app.post(
 		const movieToAdd = request.body;
 		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT.-ID ====== ${movieToAdd._id}`);
 
-		console.log(`MOVIE TO ADD ${movieToAdd.title} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
+		console.log(`MOVIE TO ADD ${movieToAdd._id} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
 
 		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
 			.then((user) => {
 				if (user) {
 					response
 						.status(403)
-						.send(
-							`Sorry ${username} The Movie ${movieToAdd.title} is already in your Favorite Movies`
-						);
+						.send(`Sorry ${user} The Movie ${movieToAdd.title} is already in your Favorite Movies`);
 				} else {
 					Users.findOneAndUpdate(
 						{ userName: request.params.userName },
