@@ -498,12 +498,11 @@ app.delete(
 		let movieToDelete = request.body;
 		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
 		let username = request.params.userName;
-		console.log(
-			`MOVIETODELETE ${movieToDelete._id} IN DELETE FAVORITE MOVIE FOR USER : ${username}`
-		);
+		movieObjectId = new ObjectId(movieToDelete.id);
+		console.log(`MOVIETODELETE ${movieObjectId} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 		Users.findOne({
 			userName: request.params.userName,
-			favoriteMovies: { $in: [movieToDelete._id] },
+			favoriteMovies: { $in: [movieObjectId] },
 		})
 			.then((user) => {
 				if (!user) {
@@ -517,7 +516,7 @@ app.delete(
 						{ userName: request.params.userName },
 						{
 							$pull: {
-								favoriteMovies: movieToDelete._id,
+								favoriteMovies: movieObjectId,
 							},
 						},
 						{ new: true } // This line makes sure that the updated document is returned
@@ -527,7 +526,7 @@ app.delete(
 							if (!user) {
 								response
 									.status(400)
-									.send(`Movie ${request.body._id}for User ${request.params.userName} NOT Found`);
+									.send(`Movie ${request.body.title}for User ${request.params.userName} NOT Found`);
 							} else {
 								response.status(201).json(user);
 							}
