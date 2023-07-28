@@ -460,9 +460,9 @@ app.post(
 	(request, response) => {
 		const username = request.params.userName;
 		const movieToAdd = request.body;
-		console.log(`REQUEST.BODY SHOULD BE MOVIE OBJECT. ====== ${movieToAdd}`);
+		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT.-ID ====== ${movieToAdd._id}`);
 
-		console.log(`MOVIE TO ADD ${movieToAdd} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
+		console.log(`MOVIE TO ADD ${movieToAdd.title} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
 
 		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
 			.then((user) => {
@@ -470,7 +470,7 @@ app.post(
 					response
 						.status(403)
 						.send(
-							`Sorry ${request.params.userName} The Movie ${movieToAdd.title} is already in your Favorite Movies`
+							`Sorry ${username} The Movie ${movieToAdd.title} is already in your Favorite Movies`
 						);
 				} else {
 					Users.findOneAndUpdate(
@@ -510,25 +510,43 @@ app.delete(
 	}),
 	(request, response) => {
 		let movieToDelete = request.body;
-		console.log(`REQUEST.BODY SHOULD BE MOVIE OBJECT. ====== ${request.body}`);
+		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
 		let username = request.params.userName;
-		console.log(`MOVIETODELETE ${movieToDelete} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
-
-		Users.findOneAndUpdate(
-			{ userName: request.params.userName },
-			{
-				$pull: {
-					favoriteMovies: movieToDelete._id,
-				},
-			},
-			{ new: true } // This line makes sure that the updated document is returned
-		)
+		console.log(
+			`MOVIETODELETE ${movieToDelete._id} IN DELETE FAVORITE MOVIE FOR USER : ${username}`
+		);
+		Users.findOne({ favoriteMovies: { $in: [movieToDelete._id] } })
 			.then((user) => {
-				console.log('USER IN DELETE FAVORITE MOVIE ############', user);
 				if (!user) {
-					response.status(400).send(`User ${request.params.userName} NOT Found`);
+					response
+						.status(404)
+						.send(
+							`Sorry ${username} The Movie ${movieToDelete.title} is not in your Favorite Movies`
+						);
 				} else {
-					response.status(201).json(user);
+					Users.findOneAndUpdate(
+						{ userName: request.params.userName },
+						{
+							$pull: {
+								favoriteMovies: movieToDelete._id,
+							},
+						},
+						{ new: true } // This line makes sure that the updated document is returned
+					)
+						.then((user) => {
+							console.log('USER IN DELETE FAVORITE MOVIE ############', user);
+							if (!user) {
+								response
+									.status(400)
+									.send(`Movie ${request.body._id}for User ${request.params.userName} NOT Found`);
+							} else {
+								response.status(201).json(user);
+							}
+						})
+						.catch((err) => {
+							console.error(err);
+							response.status(500).send(`Error: ${err}`);
+						});
 				}
 			})
 			.catch((err) => {
