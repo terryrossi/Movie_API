@@ -447,7 +447,7 @@ app.post(
 		const username = request.params.userName;
 		const movieToAdd = request.body;
 		console.log(`REQUEST.BODY.id ===================== ${movieToAdd.id}`);
-		movieObjectId = ObjectId(movieToAdd.id);
+		movieObjectId = new ObjectId(movieToAdd.id);
 		console.log('OBJECT ID ======================= ', movieObjectId);
 
 		console.log(`MOVIE TO ADD ${movieObjectId} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
