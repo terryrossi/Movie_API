@@ -464,7 +464,7 @@ app.post(
 
 		console.log(`MOVIE TO ADD ${movieToAdd._id} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
 
-		Users.findOne({ favoriteMovies: { $in: [movieToAdd._id] } })
+		Users.findOne({ userName: request.params.userName, favoriteMovies: { $in: [movieToAdd._id] } })
 			.then((user) => {
 				if (user) {
 					response
@@ -513,7 +513,10 @@ app.delete(
 		console.log(
 			`MOVIETODELETE ${movieToDelete._id} IN DELETE FAVORITE MOVIE FOR USER : ${username}`
 		);
-		Users.findOne({ favoriteMovies: { $in: [movieToDelete._id] } })
+		Users.findOne({
+			userName: request.params.userName,
+			favoriteMovies: { $in: [movieToDelete._id] },
+		})
 			.then((user) => {
 				if (!user) {
 					response
