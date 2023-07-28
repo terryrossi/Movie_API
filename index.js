@@ -337,21 +337,7 @@ app.patch(
 			.notEmpty()
 			.isAlphanumeric()
 			.withMessage('Lastname MUST ONLY contain alphanumeric chareacters.'),
-		// check('userName', 'User Name is Required.')
-		// 	.notEmpty()
-		// 	.isAlphanumeric()
-		// 	.withMessage('Username MUST ONLY contain alphanumeric chareacters.')
-		// 	.isLength({ min: 5 })
-		// 	.withMessage('Username must be at least 5 Characters Alphanumeric.'),
-		// check('password', 'Password is Required.')
-		// 	.notEmpty()
-		// 	.isLength({ min: 5 })
-		// 	.withMessage('Password must be at least 5 characters.'),
 		check('email', 'Email does not appear to be Valid.').isEmail(),
-		// check('birthDate', 'Birth Date does not appear to be Valid. Format must be: yyyy-mm-dd.')
-		// 	.trim()
-		// 	.isDate()
-		// 	.optional({ checkFalsy: true }),
 	],
 	(request, response) => {
 		let errors = validationResult(request);
@@ -460,11 +446,13 @@ app.post(
 	(request, response) => {
 		const username = request.params.userName;
 		const movieToAdd = request.body;
-		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT.-ID ====== ${movieToAdd._id}`);
+		console.log(`REQUEST.BODY.id ===================== ${movieToAdd.id}`);
+		movieObjectId = ObjectId(movieToAdd.id);
+		console.log('OBJECT ID ======================= ', movieObjectId);
 
-		console.log(`MOVIE TO ADD ${movieToAdd._id} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
+		console.log(`MOVIE TO ADD ${movieObjectId} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
 
-		Users.findOne({ userName: request.params.userName, favoriteMovies: { $in: [movieToAdd._id] } })
+		Users.findOne({ userName: request.params.userName, favoriteMovies: { $in: [movieObjectId] } })
 			.then((user) => {
 				if (user) {
 					response
@@ -475,7 +463,7 @@ app.post(
 						{ userName: request.params.userName },
 						{
 							$push: {
-								favoriteMovies: movieToAdd._id,
+								favoriteMovies: movieObjectId,
 							},
 						},
 						{ new: true } // This line makes sure that the updated document is returned
