@@ -38,30 +38,30 @@ const app = express();
 
 // CORS Security
 const cors = require('cors');
-// app.use(cors());
-let allowedOrigins = [
-	'http://localhost:8080',
-	'http://localhost:1234',
-	'http://localhost:8080/movies',
-	'https://theflix-api.herokuapp.com',
-	'https://theflix-redux.netlify.app',
-];
+app.use(cors());
+// let allowedOrigins = [
+// 	'http://localhost:8080',
+// 	'http://localhost:1234',
+// 	'http://localhost:8080/movies',
+// 	'https://theflix-api.herokuapp.com',
+// 	'https://theflix-redux.netlify.app',
+// ];
 // console.log('TESTTTTTTTTTTTT');
-app.use(
-	cors({
-		origin: (origin, done) => {
-			if (!origin) return done(null, true);
-			if (allowedOrigins.indexOf(origin) === -1) {
-				// If a specific origin isn’t found on the list of allowed origins
-				console.log('In app.use', origin);
-				let message =
-					'The CORS Policy for this application doesn"t allow access from origin ' + origin;
-				return done(new Error(message), false);
-			}
-			return done(null, true);
-		},
-	})
-);
+// app.use(
+// 	cors({
+// 		origin: (origin, done) => {
+// 			if (!origin) return done(null, true);
+// 			if (allowedOrigins.indexOf(origin) === -1) {
+// 				// If a specific origin isn’t found on the list of allowed origins
+// 				console.log('In app.use', origin);
+// 				let message =
+// 					'The CORS Policy for this application doesn"t allow access from origin ' + origin;
+// 				return done(new Error(message), false);
+// 			}
+// 			return done(null, true);
+// 		},
+// 	})
+// );
 
 app.use(bodyParser.json());
 // OR SHOULD IT BE... ?!? (based on exercise 2.9 Authentication Logic)
