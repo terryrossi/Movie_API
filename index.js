@@ -287,6 +287,7 @@ app.post(
 		let errors = validationResult(request);
 		console.log('Request received by /users/', request);
 		if (!errors.isEmpty()) {
+			console.log(errors);
 			response.status(422).json({
 				errors: errors.array(),
 			});
@@ -295,7 +296,7 @@ app.post(
 			Users.findOne({ userName: request.body.userName })
 				.then((user) => {
 					if (user) {
-						response.status(400).send(`User: ${request.body.userName} already exist!`);
+						response.status(400).send(`User "${request.body.userName}" already exist!`);
 					} else {
 						Users.create({
 							firstName: request.body.firstName,
