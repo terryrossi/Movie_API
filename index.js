@@ -287,6 +287,10 @@ app.post(
 		let errors = validationResult(request);
 		console.log('Request received by /users/', request);
 		if (!errors.isEmpty()) {
+			console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+			console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+			console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+			console.log('&&&&&&&&&&&&&&&&&&&&& SHOWING ERRORS JSON FILE: &&&&&&&&&&&&&&&&&&&&&&&&&');
 			console.log(errors);
 			response.status(422).json({
 				errors: errors.array(),
