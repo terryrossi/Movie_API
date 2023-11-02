@@ -22,7 +22,10 @@ module.exports = (router) => {
 			(error, user, info) => {
 				if (error || !user) {
 					return response.status(400).json({
-						message: 'Something went wrong! ' + error,
+						// message: 'Something went wrong! ' + error,
+						// Update for the Angular Version
+						message: 'Inalid UserId or Password',
+
 						user: user,
 					});
 				}
