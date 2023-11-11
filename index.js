@@ -499,7 +499,9 @@ app.post(
 			});
 	}
 );
-
+// WILL HAVE TO REBUILD A NEW METHOD FOR REACT/REDUX
+// THIS METHOD HAS BEEN MODIFIED FOR ANGULAR API CALL BECAUSE ANGULAR CAN'T SEND MOVIE
+// OBJECT IN BODY. INSTEAD WE WILL BE SENDING MOVIE ID AS QUERY...
 // Allow User to remove a Movie from the list of Favorites
 app.delete(
 	'/users/:userName/favorites',
@@ -507,12 +509,20 @@ app.delete(
 		session: false,
 	}),
 	(request, response) => {
-		let movieToDelete = request.body;
-		console.log(`REQUEST.BODY ====================================== ${request.body}`);
+		// let movieToDelete = request.body;
+		// console.log('REQUEST.BODY ======================================  ', request.body);
 
-		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
+		// console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
 		let username = request.params.userName;
-		movieObjectId = new ObjectId(movieToDelete._id);
+
+		// NEW CODE ADDED FOR ANGULAR:
+		let movieId = request.query.movieId;
+		console.log('MovieId to delete ==================== ', movieId);
+		//
+
+		// movieObjectId = new ObjectId(movieToDelete._id);
+		movieObjectId = new ObjectId(movieId);
+
 		console.log(`MOVIETODELETE ${movieObjectId} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 		Users.findOne({
 			userName: request.params.userName,
