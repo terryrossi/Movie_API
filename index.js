@@ -508,9 +508,11 @@ app.delete(
 	}),
 	(request, response) => {
 		let movieToDelete = request.body;
+		console.log(`REQUEST.BODY ====================================== ${request.body}`);
+
 		console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
 		let username = request.params.userName;
-		movieObjectId = new ObjectId(movieToDelete.id);
+		movieObjectId = new ObjectId(movieToDelete._id);
 		console.log(`MOVIETODELETE ${movieObjectId} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 		Users.findOne({
 			userName: request.params.userName,
