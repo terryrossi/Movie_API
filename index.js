@@ -451,8 +451,15 @@ app.post(
 	(request, response) => {
 		const username = request.params.userName;
 		const movieToAdd = request.body;
+		// MODIFICATION FOR ANGULAR APP CHECK REACT/REDUX APP .... movieToAdd.id VS movieToAdd._id
+		// MODIFICATION FOR ANGULAR APP CHECK REACT/REDUX APP ....
+		// MODIFICATION FOR ANGULAR APP CHECK REACT/REDUX APP .... movieToAdd.id VS movieToAdd._id
+		// MODIFICATION FOR ANGULAR APP CHECK REACT/REDUX APP ....
 		console.log(`REQUEST.BODY.id ===================== ${movieToAdd.id}`);
-		movieObjectId = new ObjectId(movieToAdd.id);
+		console.log(`REQUEST.BODY._id ===================== ${movieToAdd._id}`);
+
+		// movieObjectId = new ObjectId(movieToAdd.id);
+		movieObjectId = new ObjectId(movieToAdd._id);
 		console.log('OBJECT ID ======================= ', movieObjectId);
 
 		console.log(`MOVIE TO ADD ${movieObjectId} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
