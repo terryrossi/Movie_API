@@ -153,7 +153,8 @@ app.get(
 				if (movie) {
 					response.status(201).json(movie);
 				} else {
-					response.status(404).send(`Couldn't Find Movie ID: ${request.params.id}`);
+					console.log('Could not find movie objectID : ', objectId);
+					response.status(404).send(`Couldn't Find Movie ID: ${objectId}`);
 				}
 			})
 			.catch((err) => {
