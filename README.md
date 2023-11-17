@@ -113,3 +113,5 @@ Technical Requirements
 - Incorporate data validation logic into the API
 - Implement data security and storage controls
 - Host the project on the web using Heroku
+
+#### Documentation with JSDoc

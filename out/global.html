@@ -1,0 +1,3316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Global</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="DELETE"><span class="type-signature"></span>DELETE<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Deregisters a user, effectively deleting their account.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the user's username.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the deregistration request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line772">line 772</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If the user is found and deleted, returns status code 200 with a confirmation message. If the user is not found, returns status code 404.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// DELETE /users/johndoe
+// Response Example for a successful deletion:
+"User: johndoe has been Deleted"
+// Response Example for a user not found:
+"User: johndoe NOT Found"</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="DELETE"><span class="type-signature"></span>DELETE<span class="signature">(path, requestQuery, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Removes a movie from a user's list of favorite movies.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the user's username.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestQuery</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The request query containing the movieId to be removed from favorites.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the removal of the movie from the user's favorites.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line889">line 889</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If the movie is successfully removed, returns status code 201 with the updated user object. If the movie is not in the user's favorites, returns status code 404. If the user or movie is not found, returns status code 400. If an error occurs, returns status code 500.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// DELETE /users/johndoe/favorites?movieId=60e4a15c2331f4d3a4483b73
+// Response:
+// For successful removal Returns new updated User Object:
+Example:
+{
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }
+// For movie not in favorites:
+"Sorry Username The Movie movieId is not in your Favorite Movies"
+// For user or movie not found:
+"Movie or User not found"
+// For error:
+"Error: [Error Details]"</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a list of all movies. Passport authentication is optional (commented) as it is allowed to
+return the list of available movies to a non-registered user.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware (e.g., for authentication).</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object containing status code and JSON data.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// returns all movies in JSON format
+// GET /movies
+{
+   "_id":{"$oid":"64471900bfe0a96d5c75d069"},
+   "title":"Silence of the Lambs",
+   "description":"A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+   "genre":{
+       "name":"Thriller",
+       "description":"Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+   },
+   "director":{
+       "name":"Jonathan Demme",
+       "bio":"Robert Jonathan Demme was an American director, producer, and screenwriter.",
+       "birth":"1944",
+       "death":"2017",
+       "imageURL":"https://m.media-amazon.com/images/I/61Mp71SzZ+L._AC_UY436_FMwebp_QL65_.jpg",
+       "featured":true
+   },
+   "actors":[
+       {"$oid":"6447199abfe0a96d5c75d06a"},
+       {"$oid":"644719ccbfe0a96d5c75d06c"}
+   ]
+}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a single movie by its title.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the movie's title.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line149">line 149</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If found, returns the movie object with status code 201, else returns status code 404.
+Each Movie Object includes:
+     a Genre Object (name, description),
+     a Director Object (name, bio, birth, death, imageURL, featured)
+     an Array of Actors (Object IDs from the Actor Collection)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /movies/Silence of the Lambs
+// Response Example
+{
+   "_id":{"$oid":"64471900bfe0a96d5c75d069"},
+   "title":"Silence of the Lambs",
+   "description":"A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+   "genre":{
+       "name":"Thriller",
+       "description":"Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+   },
+   "director":{
+       "name":"Jonathan Demme",
+       "bio":"Robert Jonathan Demme was an American director, producer, and screenwriter.",
+       "birth":"1944",
+       "death":"2017",
+       "imageURL":"https://m.media-amazon.com/images/I/61Mp71SzZ+L._AC_UY436_FMwebp_QL65_.jpg",
+       "featured":true
+   },
+   "actors":[
+       {"$oid":"6447199abfe0a96d5c75d06a"},
+       {"$oid":"644719ccbfe0a96d5c75d06c"}
+   ]
+}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a single movie by its MongoDB Object ID.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the movie's MongoDB Object ID.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line206">line 206</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If found, returns the movie object with status code 201, else returns status code 404.
+Each Movie Object includes:
+     a Genre Object (name, description),
+     a Director Object (name, bio, birth, death, imageURL, featured)
+     an Array of Actors (Object IDs from the Actor Collection)
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /movies/id/64471900bfe0a96d5c75d069
+// Response Example
+{
+   "_id":{"$oid":"64471900bfe0a96d5c75d069"},
+   "title":"Silence of the Lambs",
+   "description":"A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+   "genre":{
+       "name":"Thriller",
+       "description":"Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."},
+   "director":{
+       "name":"Jonathan Demme",
+       "bio":"Robert Jonathan Demme was an American director, producer, and screenwriter.",
+       "birth":"1944",
+       "death":"2017",
+       "imageURL":"https://m.media-amazon.com/images/I/61Mp71SzZ+L._AC_UY436_FMwebp_QL65_.jpg",
+       "featured":true
+    }
+   "actors":[
+       {"$oid":"6447199abfe0a96d5c75d06a"},
+       {"$oid":"644719ccbfe0a96d5c75d06c"}
+   ]
+}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get details of a specific genre by genre name.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the genre's name.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line268">line 268</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If found, returns the details of the genre with status code 201, else returns status code 404.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /genres/Action
+// Response Example
+{
+  "genre":{
+       "name":"Thriller",
+       "description":"Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+  }
+}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get details of a specific director by their name.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the director's name.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line305">line 305</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If a movie by the director is found, returns the movie
+including the details of the director with status code 201, else returns status code 404.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /director/Jonathan Demme
+// Response Example
+* {
+   "_id":{"$oid":"64471900bfe0a96d5c75d069"},
+   "title":"Silence of the Lambs",
+   "description":"A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+   "genre":{
+       "name":"Thriller",
+       "description":"Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."},
+   "director":{
+       "name":"Jonathan Demme",
+       "bio":"Robert Jonathan Demme was an American director, producer, and screenwriter.",
+       "birth":"1944",
+       "death":"2017",
+       "imageURL":"https://m.media-amazon.com/images/I/61Mp71SzZ+L._AC_UY436_FMwebp_QL65_.jpg",
+       "featured":true
+    }
+   "actors":[
+       {"$oid":"6447199abfe0a96d5c75d06a"},
+       {"$oid":"644719ccbfe0a96d5c75d06c"}
+   ]
+}</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get a list of all registered users.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path to fetch all users.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line356">line 356</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If users are found, returns an array of user objects with status code 201, else returns status code 404.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /users/
+// Response Example
+[
+  {
+     "_id":{"$oid":"6456d0f13558b251e39e6c2f"},
+     "firstName":"Bill",
+     "lastName":"Brown",
+     "userName":"bbrown",
+     "email":"bbrown@hotmail.com",
+     "password":"$2b$10$.qrXcq2hnrvSszJP92UxGuhezKtl9drWVyQlkicZAPCgtnLdfsW.S",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"}
+         ],
+     "__v":{"$numberInt":"0"}
+   },
+  {
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }
+]</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="GET"><span class="type-signature"></span>GET<span class="signature">(path, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get details of a specific user by their username.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the user's username.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line422">line 422</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If the user is found, returns the user object with status code 201, else returns status code 404.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// GET /users/Bondurant
+// Response Example
+{
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="PATCH"><span class="type-signature"></span>PATCH<span class="signature">(path, requestBody, middleware, validationMiddlewares, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Updates a user's first name, last name, and email.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestBody</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The request body containing the User object to be modified.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>validationMiddlewares</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middlewares for input validation using express-validator.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the update request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line595">line 595</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If validation fails, returns status code 422 with validation errors. On successful update, returns the updated user object with status code 201. If the user is not found, returns status code 400.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// PATCH /users/
+// Request body:
+{
+  "_id": "60e4a15c2331f4d3a4483b73",
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "email": "janedoe@example.com"
+}
+// Response:
+// For a successful update, returns User Object:
+{
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }
+// For validation error:
+{ "errors": [{ "msg": "First Name is Required." }, ...] }
+// For user not found:
+"User not found"</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="PATCH"><span class="type-signature"></span>PATCH<span class="signature">(path, requestBody, middleware, validationMiddlewares, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Allows a registered user to change their password.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path for updating the user's password.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestBody</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The request body containing the User object to be modified.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>validationMiddlewares</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middlewares for password validation using express-validator.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the password update request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line687">line 687</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If validation fails, returns status code 422 with validation errors. On successful password update, returns the updated user object with status code 201. If the user is not found, returns status code 400.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// PATCH /users/password
+// Request body:
+ "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "password": "newpassword",
+     "email":"bbondurant@gmail.com",
+// Response:
+// For a successful update, returns new updated User object:
+{
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }
+// For validation error:
+{ "errors": [{ "msg": "Password is Required." }, ...] }
+// For user not found:
+"User not found"</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="POST"><span class="type-signature"></span>POST<span class="signature">(path, requestBody, middlewares, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Registers a new user with provided details.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestBody</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The request body containing the User object to be added.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middlewares</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middlewares for input validation using express-validator.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the registration request.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line479">line 479</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If validation fails, returns status code 422 with validation errors. On successful registration, returns the new user object with status code 201. If a user already exists with the given username, returns status code 400.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// POST /users/
+// Request body:
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "userName": "johndoe",
+  "email": "johndoe@example.com",
+  "password": "yourpassword",
+  "birthDate": "2000-01-01"
+}
+// Response:
+// For a successful registration returns User Object:
+{
+     "_id":{"$oid":"645ea47035e79c106fc5af0a"},
+     "firstName":"Bobby",
+     "lastName":"Bondurant",
+     "userName":"bbondurant",
+     "email":"bbondurant@gmail.com",
+     "password":"$2b$10$lDgkWryn30kzLh95hDvgDei0wyqvSGo28lExHIhf2zfjrLkLKDeYq",
+     "birthDate":{"$date":{"$numberLong":"946771200000"}},
+     "favoriteMovies":
+         [
+           {"$oid":"64473fae73aaa127fc941269"},
+           {"$oid":"64473f0d73aaa127fc941267"},
+           {"$oid":"6447256bbfe0a96d5c75d06e"},
+           {"$oid":"644729a5bfe0a96d5c75d073"},
+           {"$oid":"64472787bfe0a96d5c75d071"},
+         ],
+     "__v":{"$numberInt":"0"
+   }
+// For validation error:
+{ "errors": [{ "msg": "User Name is Required." }, ...] }
+// For an existing username:
+"User 'johndoe' already exists!"</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="POST"><span class="type-signature"></span>POST<span class="signature">(path, requestBody, middleware, callback)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Adds a movie to a user's list of favorite movies.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express path with a parameter for the user's username.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>requestBody</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The request body containing the movie object to be added to the favorites.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>middleware</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express middleware for JWT authentication.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Callback function that handles the addition of the movie to the user's favorites.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line806">line 806</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    response - The response object. If the movie is successfully added, returns status code 201 with the updated user object. If the movie is already in the user's favorites, returns status code 403. If the user is not found, returns status code 400. If an error occurs, returns status code 500.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// POST /users/johndoe/favorites
+// Request body:
+{
+  "_id": "60e4a15c2331f4d3a4483b73"
+}
+// Response:
+// For successful addition:
+{ "userName": "johndoe", "favoriteMovies": ["60e4a15c2331f4d3a4483b73", ...] }
+// For movie already in favorites:
+"The Movie [Movie Title] is already in your Favorite Movies"
+// For user not found:
+"User johndoe NOT Found"
+// For error:
+"Error: [Error Details]"</code></pre>
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#DELETE">DELETE</a></li><li><a href="global.html#GET">GET</a></li><li><a href="global.html#PATCH">PATCH</a></li><li><a href="global.html#POST">POST</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Nov 17 2023 11:02:44 GMT-0800 (Pacific Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
