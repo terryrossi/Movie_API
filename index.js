@@ -841,8 +841,23 @@ app.patch(
 		console.log(`REQUEST.BODY.id ===================== ${movieToAdd.id}`);
 		console.log(`REQUEST.BODY._id ===================== ${movieToAdd._id}`);
 
-		// movieObjectId = new ObjectId(movieToAdd.id);
-		movieObjectId = new ObjectId(movieToAdd._id);
+		let movieObjectId;
+
+		// The following line is commented because it only works with react/redux app but not with angular
+		if (request.body.id) {
+			movieObjectId = new ObjectId(movieToAdd.id);
+		}
+
+		// The following line works only with angular
+		else if (request.body._id) {
+			movieObjectId = new ObjectId(movieToAdd._id);
+		}
+
+		// If neither, send an error response
+		else {
+			return response.status(400).send('Invalid request format.');
+		}
+
 		console.log('OBJECT ID ======================= ', movieObjectId);
 
 		console.log(`MOVIE TO ADD ${movieObjectId} IN ADD FAVORITE MOVIE FOR USER : ${username}`);
