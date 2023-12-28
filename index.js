@@ -845,11 +845,14 @@ app.patch(
 
 		// The following line is commented because it only works with react/redux app but not with angular
 		if (request.body.id) {
+			console.log('........... In AddFavorite: if (request.body.id) .................');
 			movieObjectId = new ObjectId(movieToAdd.id);
 		}
 
 		// The following line works only with angular
 		else if (request.body._id) {
+			console.log('........... In AddFavorite: if (request.body._id) .................');
+
 			movieObjectId = new ObjectId(movieToAdd._id);
 		}
 
@@ -954,12 +957,22 @@ app.patch(
 		let movieObjectId;
 
 		// The following line only works with react/redux app but not with angular
-		if (request.body) {
+		if (request.body.id) {
+			console.log(
+				'........... In DeleteFavorite: if (request.body.id) .................',
+				request.body.id
+			);
+
 			movieObjectId = new ObjectId(request.body.id);
 		}
 
-		// The following line works only with angular
+		// The following line works only with Angular
 		else if (request.query.movieId) {
+			console.log(
+				'........... In DeleteFavorite: if (request.query.movieId) .................',
+				request.query.movieId
+			);
+
 			movieObjectId = new ObjectId(request.query.movieId);
 		}
 
