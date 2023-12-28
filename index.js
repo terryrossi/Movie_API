@@ -975,7 +975,7 @@ app.patch(
 		//
 
 		// movieObjectId = new ObjectId(movieToDelete._id);
-		movieObjectId = new ObjectId(movieId);
+		// movieObjectId = new ObjectId(movieId);
 
 		console.log(`MOVIETODELETE ${movieObjectId} IN DELETE FAVORITE MOVIE FOR USER : ${username}`);
 		Users.findOne({
