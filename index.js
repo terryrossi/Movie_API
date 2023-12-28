@@ -949,10 +949,29 @@ app.patch(
 
 		// console.log(`REQUEST.BODY._id SHOULD BE MOVIE OBJECT._id ====== ${request.body._id}`);
 		let username = request.params.userName;
+		// const movieToDelete = request.body;
+
+		let movieObjectId;
+
+		// The following line only works with react/redux app but not with angular
+		if (request.body) {
+			movieObjectId = new ObjectId(request.body.id);
+		}
+
+		// The following line works only with angular
+		else if (request.query.movieId) {
+			movieObjectId = new ObjectId(request.query.movieId);
+		}
+
+		// If neither, send an error response
+		else {
+			return response.status(400).send('Invalid request format.');
+		}
 
 		// NEW CODE ADDED FOR ANGULAR:
-		let movieId = request.query.movieId;
-		console.log('MovieId to delete ==================== ', movieId);
+		// let movieId = request.query.movieId;
+
+		console.log('MovieId to delete ==================== ', movieObjectId);
 		//
 
 		// movieObjectId = new ObjectId(movieToDelete._id);
@@ -967,9 +986,7 @@ app.patch(
 				if (!user) {
 					response
 						.status(404)
-						.send(
-							`Sorry ${username}, The Movie ${movieToDelete.title} is not in your Favorite Movies`
-						);
+						.send(`Sorry ${username}, The Movie ${movieObjectId} is not in your Favorite Movies`);
 				} else {
 					Users.findOneAndUpdate(
 						{ userName: request.params.userName },
@@ -984,7 +1001,7 @@ app.patch(
 							if (!user) {
 								response
 									.status(400)
-									.send(`Movie ${movieId} for User ${request.params.userName} NOT Found`);
+									.send(`Movie ${movieObjectId} for User ${request.params.userName} NOT Found`);
 							} else {
 								response.status(201).json(user);
 							}
